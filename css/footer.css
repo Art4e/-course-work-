@@ -1,0 +1,23 @@
+.footer {
+  background-color: #000;
+}
+.footer__container {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 50px;
+  padding-bottom: 35px;
+}
+.footer__container .logo__link {
+}
+.logo__img {
+}
+.footer__link {
+  display: flex;
+  justify-content: space-between;
+  width: 175px;
+}
+.link__item {
+  width: 45px;
+  height: 45px;
+  margin-left: 13px;
+}

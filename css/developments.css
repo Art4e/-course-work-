@@ -1,0 +1,108 @@
+.developments {
+  overflow-anchor: none;
+}
+
+.developments__header {
+  margin-bottom: 19px;
+}
+
+.developments__body {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  margin-right: calc((100% - 3 * 30.6%) / -3);
+}
+.developments__body::after {
+  content: "";
+  flex: auto;
+}
+
+.developments__event-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 30.6%;
+  margin-right: calc((100% - 3 * 30.6%) / 3);
+  margin-bottom: 53px;
+}
+
+.event-card,
+.event-card__body {
+  padding: 0;
+  margin: 0;
+}
+
+.event-card {
+  width: 100%;
+}
+
+.event-card__img {
+  width: 100%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.event-card__body {
+  padding: 0 49px 0 45px;
+}
+
+.event-card__signature {
+  display: block;
+  margin-right: -33px;
+  margin-bottom: 4px;
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  text-align: right;
+  color: #999;
+}
+
+.event-card__header {
+  margin-right: -2px;
+  line-height: 1.3;
+  margin-bottom: 3px;
+}
+
+.event-card__text {
+  margin-bottom: 21px;
+}
+
+.event-card__link {
+  margin-left: 49px;
+  line-height: 1.7;
+}
+
+.event-card__link:visited,
+.event-card__link {
+  border-bottom: 1px solid var(--main-highlight-color);
+  color: var(--main-highlight-color);
+}
+
+.event-card__link:focus {
+  outline: var(--link-focus-outline);
+}
+
+.event-card__link:hover {
+  font-weight: 700;
+}
+
+.event-card__link:active {
+  color: var(--link-focus);
+}
+
+.event-card__btn {
+  display: flex;
+  padding: 18px 34px;
+  letter-spacing: 1.5px;
+  margin: 0 auto;
+  color: var(--main-highlight-color);
+}
+.btn-interaction.event-card__btn:hover,
+.btn-interaction.event-card__btn:active {
+  color: var(--fonts-secondary-color);
+}
+
+.deactivated {
+  display: none;
+}
