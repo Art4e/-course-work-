@@ -3,7 +3,7 @@
 	'use strict';
 
 	function switchTab(menu, tab) {
-		let items = menu.querySelectorAll('li');
+		let items = menu.querySelectorAll('button');
 		let currIndex;
 
 		[].forEach.call(items, (item, index) => {
@@ -30,16 +30,13 @@
 		const tabsmenu = document.querySelectorAll(tabMenuNode);
 		if (!tabsmenu) return;
 		const content = document.querySelector(tabContainerNode);
-		const activDefaultBlockEl = content.querySelectorAll('.tab__item')[ 0 ];
+		const activDefaultBlockEl = content.querySelectorAll('.tab__item')[0];
 
 		activDefaultBlockEl.style.display = 'block';
 
 		[].forEach.call(tabsmenu, (menu) => {
 			menu.addEventListener('click', (el) => {
-				if (el.target.tagName === 'LI') {
-
-					// console.log(menu);
-					// console.log(el.target);
+				if (el.target.tagName === 'BUTTON') {
 					const currIndex = switchTab(menu, el.target);
 
 					switchBlock(currIndex, content);
@@ -61,8 +58,8 @@
 		const removeAttr = (elemensAll, element, indexEl) => {
 			element.setAttribute(`data-tab-switch`, `false`);
 			element.classList.remove(`activ`);
-			elemensAll[ indexEl ].setAttribute(`data-tab-open`, `false`);
-			elemensAll[ indexEl ].classList.remove(`activ`);
+			elemensAll[indexEl].setAttribute(`data-tab-open`, `false`);
+			elemensAll[indexEl].classList.remove(`activ`);
 		};
 
 		tabSwitchAllEl.forEach((el, index) => {
@@ -85,8 +82,8 @@
 				el.classList.add(`activ`);
 
 				setTimeout(() => {
-					tabAllEl[ index ].setAttribute(`data-tab-open`, `true`);
-					tabAllEl[ index ].classList.add(`activ`)
+					tabAllEl[index].setAttribute(`data-tab-open`, `true`);
+					tabAllEl[index].classList.add(`activ`)
 				}, 20)
 			})
 		})

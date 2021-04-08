@@ -3,11 +3,11 @@
   document.addEventListener('DOMContentLoaded', () => {
 
     const swiperHead = new Swiper('.hero__slider', {
-      speed: 1500,
-      // autoplay: {
-      //   delay: 5000,
-      //   autoplayDisableOnInteraction: false,
-      // },
+      // speed: 1500,
+      autoplay: {
+        delay: 3000,
+        autoplayDisableOnInteraction: false,
+      },
       loop: true,
       effect: 'fade'
       // scrollbar: {
@@ -155,7 +155,7 @@
       const developmentsEl = document.querySelectorAll('.developments__event-card');
 
       developmentsEl.forEach(el => {
-        if (el.offsetTop !== developmentsEl[ 0 ].offsetTop) {
+        if (el.offsetTop !== developmentsEl[0].offsetTop) {
           el.classList.add('deactivated');
         };
       });
@@ -249,12 +249,11 @@
         nextSlideMessage: 'Следующий слайд'
       },
       pagination: {
-        el: '.slider__pagination',
+        el: '.edition-slider__pagination',
         clickable: true,
         type: 'fraction'
       }
     });
-
 
     // слайдер - партнеры
     const swiperPartners = new Swiper('.projects-slaider', {
@@ -319,18 +318,18 @@
   ymaps.ready(init);
   function init() {
     let myMap = new ymaps.Map("custom__map", {
-      center: [ 55.7584, 37.6010 ],
+      center: [55.7584, 37.6010],
       zoom: 15,
       controls: [],
     });
 
-    let myGeoObject = new ymaps.Placemark([ 55.758463, 37.601079 ], {
+    let myGeoObject = new ymaps.Placemark([55.758463, 37.601079], {
 
     }, {
       iconLayout: 'default#image',
       iconImageHref: './img/contacts/marker.svg',
-      iconImageSize: [ 20, 20 ],
-      iconImageOffset: [ -10, -10 ]
+      iconImageSize: [20, 20],
+      iconImageOffset: [-10, -10]
     });
 
     // Размещение геообъекта на карте.

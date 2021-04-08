@@ -13,21 +13,21 @@
   height: 800px;
 }
 
-.hero__slider__body,
-.hero__slider__slide {
+.hero__slider-body,
+.swiper-slide {
   height: 100%;
 }
 
-.hero__slider__slide:nth-child(1) {
+.hero__slide-1 {
   background: url("../img/hero/hero-1.jpg") 50% / cover no-repeat;
 }
 
-.hero__slider__slide:nth-child(2) {
+.hero__slide-2 {
   background: url("../img/hero/hero-2.jpg") 50% / cover no-repeat;
 }
 
-.hero__slider__slide:nth-child(3) {
-  background: url("../img/hero/hero-2.jpg") 50% / cover no-repeat;
+.hero__slide-3 {
+  background: url("../img/hero/hero-3.jpg") 50% / cover no-repeat;
 }
 
 .hero__solutions {
