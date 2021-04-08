@@ -231,16 +231,16 @@
   user-select: none;
 }
 
-
 .col-right__btn {
   background-color: transparent;
   margin: 0;
   padding: 0;
-  border-color: transparent;
+  border: 2px solid transparent;
+  transition: border 0.5s ease, color 0.5s ease;
 }
 .col-right__btn:hover {
   color: var(--main-highlight-color);
-  text-decoration: underline;
+  border: var(--link-focus-outline);
 }
 .col-right__btn.js-active-tab {
   border-color: var(--main-highlight-color);
