@@ -115,19 +115,13 @@
   width: 29px;
   height: 29px;
   border-radius: 50%;
-  background-color: #666;
+  background-color: #ececec;
   font-size: 1rem;
   line-height: 2.4rem;
   color: #000;
   border: 2px solid transparent;
   transition: border, background, color var(--delay-animation);
 }
-/* .projects-slaider__btn-next::after {
-  left: -10px;
-}
-.projects-slaider__btn-prev::after {
-  left: 2px;
-} */
 .projects-slaider__btn-prev:hover:after,
 .projects-slaider__btn-next:hover:after {
   background-color: var(--main-highlight-color);
