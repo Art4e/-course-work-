@@ -14,18 +14,26 @@
   position: relative;
   display: inline-block;
   width: 18px;
+  border: none;
+  background: none;
 }
-
 .projects__tooltip::after {
   position: absolute;
   content: "";
   width: 18px;
   height: 18px;
+  left: 0;
   top: -14px;
-  background: url("../img/projects/i.svg") 50% no-repeat;
+  background: url(../img/projects/i.svg) 50% no-repeat;
   background-color: var(--main-highlight-color);
+  border: 2px solid transparent;
   border-radius: 50%;
   cursor: pointer;
+}
+.projects__tooltip:hover::after,
+.projects__tooltip:focus::after {
+  background-color: var(--link-hover);
+ border-color: var(--main-highlight-color);
 }
 .projects__tooltip._activ::before {
   position: absolute;

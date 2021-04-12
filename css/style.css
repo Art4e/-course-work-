@@ -198,6 +198,8 @@ body {
   background: none;
   border: 2px solid var(--main-highlight-color);
   border-radius: var(--btn-border-radius);
+  font-size: 1.8rem;
+  font-weight: bold;
   color: var(--fonts-secondary-color);
 }
 

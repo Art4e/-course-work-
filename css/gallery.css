@@ -120,6 +120,8 @@
 .slider__pagination {
   min-width: 71px;
   width: auto;
+  padding-left: 10px;
+  padding-right: 10px;
   text-align: center;
   color: var(--fonts-secondary-color);
 }

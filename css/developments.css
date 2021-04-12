@@ -95,9 +95,9 @@
 
 .event-card__btn {
   display: flex;
+  margin: 0 auto;
   padding: 18px 34px;
   letter-spacing: 1.5px;
-  margin: 0 auto;
   color: var(--main-highlight-color);
 }
 .btn-interaction.event-card__btn:hover,

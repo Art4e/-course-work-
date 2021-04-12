@@ -42,14 +42,17 @@
 }
 
 .categories__label {
-  /* position: relative;*/
-  padding-left: 24px;
+  margin-left: 20px;
+  padding-left: 4px;
+  padding-right: 4px;
   cursor: pointer;
   line-height: 2;
 }
 
 .categories__checkbox {
-  display: none;
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
 }
 
 .categories__marker {
@@ -75,8 +78,17 @@
   border-radius: 50%;
   transition: background-color var(--delay-animation);
 }
-.categories__label:focus {
+.categories__checkbox:focus ~ .categories__label {
   outline: var(--link-focus-outline);
+}
+.categories__checkbox:active ~ .categories__marker {
+  border: 1px solid var(--link-focus-outline);
+}
+.categories__checkbox:active ~ .categories__label {
+  color: var(--link-focus);
+}
+.categories__checkbox:hover ~ .categories__marker {
+  border: 1px solid var(--link-hover);
 }
 .categories__checkbox:hover ~ .categories__label {
   color: var(--link-hover);
@@ -114,7 +126,7 @@
 .price__input:hover,
 .price__input:focus,
 .price__input:active {
-  outline: 1px solid var(--fonts-secondary-color);
+  outline: 1px solid var(--link-hover);
 }
 .price__input::placeholder {
   color: var(--fonts-secondary-color);
