@@ -23,9 +23,9 @@
   .block-text {
     padding-right: calc(58.15vw - 595.43px);
   }
-  .projects__slaider {
+  .projects__slider {
   }
-  .projects-slaider {
+  .projects-slider {
     margin-left: calc(2.57vw + 26.714px);
     margin-right: calc(2.57vw + 26.714px);
   }
@@ -224,12 +224,12 @@
     margin-bottom: 3px;
   }
 
-  .projects-slaider__btn-next,
-  .projects-slaider__btn-prev {
+  .projects-slider__btn-next,
+  .projects-slider__btn-prev {
     top: 66px;
   }
 
-  .projects-slaider__slaid {
+  .projects-slider__slide {
     height: 128px;
   }
 
@@ -532,11 +532,11 @@
   }
 
   .swiper-button-next,
-  .projects-slaider__btn-prev {
+  .projects-slider__btn-prev {
     top: 55px;
   }
 
-  .projects-slaider__slaid {
+  .projects-slider__slide {
     height: 106px;
   }
 
@@ -707,8 +707,8 @@
   }
 
   .contacts__colum-left_address {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
   .contacts__colum-left {

@@ -256,7 +256,7 @@
     });
 
     // слайдер - партнеры
-    const swiperPartners = new Swiper('.projects-slaider', {
+    const swiperPartners = new Swiper('.projects-slider', {
       breakpoints: {
         1200: {
           slidesPerView: 3,
@@ -278,8 +278,8 @@
         },
       },
       navigation: {
-        nextEl: '.projects-slaider__btn-next',
-        prevEl: '.projects-slaider__btn-prev'
+        nextEl: '.projects-slider__btn-next',
+        prevEl: '.projects-slider__btn-prev'
       },
       a11y: {
         prevSlideMessage: 'Предыдущий слайд',
@@ -322,6 +322,10 @@
       zoom: 15,
       controls: [],
     });
+    myMap.behaviors.disable('scrollZoom');
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      myMap.behaviors.disable('drag');
+    }
 
     let myGeoObject = new ymaps.Placemark([55.758463, 37.601079], {
 
