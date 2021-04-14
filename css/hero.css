@@ -60,7 +60,7 @@
   outline: none;
   background: var(--main-highlight-color);
   font-size: 1.8rem;
-  letter-spacing: 0.85px;
+  letter-spacing: 0.45px;
   transition: border 0.5s ease, background 0.5s ease;
 }
 

@@ -227,7 +227,7 @@
   font-style: italic;
 }
 .edition-card__btn {
-  padding: 9px 25px;
+  padding: 9px 18px;
   transition: background-color var(--delay-animation);
 }
 .btn-interaction:hover {

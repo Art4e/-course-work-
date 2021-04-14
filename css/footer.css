@@ -20,24 +20,24 @@
 }
 .link__item {
   display: inline-block;
-  width: 45px;
-  height: 45px;
-  margin-left: 13px;
+  width: 48px;
+  height: 48px;
+  margin-left: 12px;
   outline: none;
 }
 .link__item-svg {
-  fill: #CACACA;
+  fill: #cacaca;
   border-radius: 50%;
   border: 3px solid transparent;
-  transition: border-color 0.5s ease fill 0.5s ease;
+  transition: border 0.5s ease, fill 0.5s ease;
 }
 .link__item:hover > .link__item-svg {
   fill: var(--link-hover);
 }
-.link__item:focus > .link__item-svg  {
+.link__item:focus > .link__item-svg {
   border-color: var(--link-focus);
 }
-.link__item:active > .link__item-svg  {
+.link__item:active > .link__item-svg {
   fill: var(--link-hover);
   border-color: var(--link-focus);
 }
