@@ -35,6 +35,8 @@
   --link-hover: #c283f3;
   --btn-border-radius: calc(100 / 2 * 1px);
   --delay-animation: 0.3s ease-in-out;
+  --container-padding: 160px;
+  /* --container-padding-right:; */
 }
 
 *,
@@ -177,7 +179,7 @@ body {
 
 .container {
   max-width: 1920px;
-  padding: 0 160px;
+  padding: 0 var(--container-padding);
   margin: 0 auto;
 }
 
