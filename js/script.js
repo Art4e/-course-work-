@@ -227,7 +227,7 @@
         1000: {
           slidesPerView: 2,
           slidesPerGroup: 2,
-          spaceBetween: 40
+          spaceBetween: 42
         },
         500: {
           slidesPerView: 2,

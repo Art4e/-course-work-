@@ -7,9 +7,10 @@
   display: flex;
   justify-content: space-between;
   padding-top: 50px;
-  padding-bottom: 35px;
+  padding-bottom: 32px;
 }
 .footer__container .logo__link {
+  padding-top: 1px;
 }
 .logo__img {
 }
@@ -20,12 +21,14 @@
 }
 .link__item {
   display: inline-block;
-  width: 48px;
-  height: 48px;
-  margin-left: 12px;
+  width: 53px;
+  height: 53px;
+  margin-left: 7px;
   outline: none;
 }
 .link__item-svg {
+  width: 100%;
+  height: 100%;
   fill: #cacaca;
   border-radius: 50%;
   border: 3px solid transparent;
