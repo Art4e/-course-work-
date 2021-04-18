@@ -78,13 +78,13 @@
 
 .burger__body:before {
   top: -12px;
-  width: 32px;
+  width: 36px;
   transform-origin: 50% 0;
 }
 
 .burger__body:after {
   bottom: -12px;
-  width: 23px;
+  width: 24px;
   transform-origin: 50% 100%;
 }
 
