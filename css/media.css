@@ -896,6 +896,15 @@
   .developments__event-card {
     width: 100%;
   }
+  .event-card__btn {
+    display: none;
+  }
+  .deactivated {
+    display: auto;
+  }
+  .developments-slider__pagination {
+    display: block;
+  }
   .event-card__img {
     margin-bottom: 12px;
   }

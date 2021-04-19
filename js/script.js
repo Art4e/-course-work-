@@ -3,21 +3,12 @@
   document.addEventListener('DOMContentLoaded', () => {
 
     const swiperHead = new Swiper('.hero__slider', {
-      // speed: 1500,
       autoplay: {
         delay: 3000,
         autoplayDisableOnInteraction: false,
       },
       loop: true,
       effect: 'fade'
-      // scrollbar: {
-      //   hide: true,
-      // },
-      // pagination: {
-      //   el: '.swiper-pagination',
-      //   bulletElement: 'button',
-      //   clickable: true,
-      // }
     });
 
     // Открываем, закрываем бургер меню
@@ -76,10 +67,8 @@
       window.matchMedia(`(max-width: ${SIZE_SCRIN}px)`).addListener(movingFormSearch);
     })();
 
-
     // ToolTip
     ; (() => {
-
       const createToolTip = (dataToolTipEl) => {
         const containerToolTipEl = document.querySelector(dataToolTipEl);
         const toolTipAllEl = containerToolTipEl.querySelectorAll(`[data-tooltip]`);
@@ -146,7 +135,6 @@
       };
 
       createToolTip(`.projects__text`)
-
     })();
 
     // Отобразить или скыть карточки "Сообытия" после первой "линии событий"
@@ -155,7 +143,9 @@
       const developmentsEl = document.querySelectorAll('.developments__event-card');
 
       developmentsEl.forEach(el => {
-        if (el.offsetTop !== developmentsEl[0].offsetTop) {
+        console.log(el.offsetTop)
+        console.log(developmentsEl[ 0 ].offsetTop)
+        if (el.offsetTop !== developmentsEl[ 0 ].offsetTop) {
           el.classList.add('deactivated');
         };
       });
@@ -168,6 +158,19 @@
         });
       });
     })();
+    // Слайдер карточек -  "Сообытия"
+    const swiperDevelopments = new Swiper('.developments-slider', {
+      // effect: 'fade',
+      slidesPerView: 1,
+      slidesPerGroup: 1,
+      pagination: {
+        el: '.developments-slider__pagination',
+        bulletElement: 'button',
+        clickable: true,
+      }
+    });
+    console.log(window.innerWidth > 650)
+    window.innerWidth > 650 ? swiperDevelopments.destroy() : swiperDevelopments.init();
 
     // слайдер галерея
     const swiperGallery = new Swiper('.gallery-slider', {
@@ -318,7 +321,7 @@
   ymaps.ready(init);
   function init() {
     let myMap = new ymaps.Map("custom__map", {
-      center: [55.7584, 37.6010],
+      center: [ 55.7584, 37.6010 ],
       zoom: 15,
       controls: [],
     });
@@ -327,13 +330,13 @@
       myMap.behaviors.disable('drag');
     }
 
-    let myGeoObject = new ymaps.Placemark([55.758463, 37.601079], {
+    let myGeoObject = new ymaps.Placemark([ 55.758463, 37.601079 ], {
 
     }, {
       iconLayout: 'default#image',
       iconImageHref: './img/contacts/marker.svg',
-      iconImageSize: [20, 20],
-      iconImageOffset: [-10, -10]
+      iconImageSize: [ 20, 20 ],
+      iconImageOffset: [ -10, -10 ]
     });
 
     // Размещение геообъекта на карте.

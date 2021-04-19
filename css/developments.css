@@ -108,3 +108,6 @@
 .deactivated {
   display: none;
 }
+.developments-slider__pagination {
+  display: none;
+}
