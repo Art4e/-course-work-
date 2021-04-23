@@ -29,6 +29,7 @@
 }
 
 .categories__head {
+  position: relative;
   font-size: 1.6rem;
   font-weight: 700;
   color: var(--fonts-secondary-color);
@@ -137,7 +138,7 @@
   margin-left: auto;
   margin-right: -3px;
 }
-.edition-slider__navigation {
+.slider__navigation_edition {
   top: -5px;
   margin-top: 0;
   margin-left: -7px;

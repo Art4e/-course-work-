@@ -238,9 +238,6 @@
                 <option class="filter__option" value="Техника-3">Техника-3</option>
               </select>
             </div>
-
-
-
           </div>
           <p class="body-text gallery__body_left-colum">
             Вам предоставляется 10 бесплатных скачиваний. Для увеличения количества скачиваний
@@ -1035,8 +1032,8 @@
       <h2 class="developments__header first-header" id="developments">
         Cобытия
       </h2>
-      <div class="developments-slider">
-        <ul class="developments__body swiper-wrapper">
+      <div class="developments-slider swiper-container" data-mobile="false">
+        <ul class="developments__body swiper-wrapper js-developments">
           <li class="developments__event-card swiper-slide">
             <figure class="event-card">
               <img class="event-card__img" src="./img/developments/1.jpg" alt="Изображение гравюры">
@@ -1125,8 +1122,8 @@
           <h2 class="edition__header first-header" id="edition">
             Издания
           </h2>
-          <h3 class="categories__head second-header">Категории:</h3>
-          <ul class="categories__body">
+          <h3 class="categories__head categories__head_filter second-header js-cat-filter">Категории:</h3>
+          <ul class="categories__body js-filter-body">
             <li class="categories__item">
               <input class="categories__checkbox" type="checkbox" id="Best-sellers" name="Best-sellers"
                 value="Best-sellers">
@@ -1205,14 +1202,14 @@
           </div>
         </div>
         <div class="edition__slider">
-          <div class="slider__navigation edition-slider__navigation">
+          <div class="slider__navigation slider__navigation_edition">
             <div class="edition-slider-btn-prev swiper-button-prev"></div>
             <div class="slider__pagination edition-slider__pagination"></div>
             <div class="edition-slider-btn-next swiper-button-next"></div>
           </div>
-          <div class="edition-slider swiper-container">
+          <div class="edition-slider swiper-container" data-mobile="true">
             <ul class="edition-slider__slides swiper-wrapper">
-              <li class="swiper-slide">
+              <li class="swiper-slide edition__item">
                 <div class="edition-card">
                   <img class="edition-card__img" src="./img/edition/edition-1.jpg" alt="Репрадукция картины">
                   <div class="edition-card__body">
@@ -1227,7 +1224,7 @@
                   </button>
                 </div>
               </li>
-              <li class="swiper-slide">
+              <li class="swiper-slide edition__item">
                 <div class="edition-card">
                   <img class="edition-card__img" src="./img/edition/edition-02.jpg" alt="Репрадукция картины">
                   <div class="edition-card__body">
@@ -1242,7 +1239,7 @@
                   </button>
                 </div>
               </li>
-              <li class="swiper-slide">
+              <li class="swiper-slide edition__item">
                 <div class="edition-card">
                   <img class="edition-card__img" src="./img/edition/edition-03.jpg" alt="Репрадукция картины">
                   <div class="edition-card__body">
@@ -1257,7 +1254,7 @@
                   </button>
                 </div>
               </li>
-              <li class="swiper-slide">
+              <li class="swiper-slide edition__item">
                 <div class="edition-card">
                   <img class="edition-card__img" src="./img/edition/edition-04.jpg" alt="Репрадукция картины">
                   <div class="edition-card__body">
@@ -1272,7 +1269,7 @@
                   </button>
                 </div>
               </li>
-              <li class="swiper-slide">
+              <li class="swiper-slide edition__item">
                 <div class="edition-card">
                   <img class="edition-card__img" src="./img/edition/edition-05.jpg" alt="Репрадукция картины">
                   <div class="edition-card__body">
@@ -1287,7 +1284,7 @@
                   </button>
                 </div>
               </li>
-              <li class="swiper-slide">
+              <li class="swiper-slide edition__item">
                 <div class="edition-card">
                   <img class="edition-card__img" src="./img/edition/edition-06.jpg" alt="Репрадукция картины">
                   <div class="edition-card__body">
@@ -1302,7 +1299,7 @@
                   </button>
                 </div>
               </li>
-              <li class="swiper-slide">
+              <li class="swiper-slide edition__item">
                 <div class="edition-card">
                   <img class="edition-card__img" src="./img/edition/edition-07.jpg" alt="Репрадукция картины">
                   <div class="edition-card__body">

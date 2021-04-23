@@ -1,5 +1,8 @@
+:root {
+  --width-dev-event-card: 31.6%;
+}
 .developments {
-  margin-bottom: 82px;
+  margin-bottom: 84px;
   overflow-anchor: none;
 }
 
@@ -11,8 +14,7 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-bottom: 37px;
-  margin-right: calc((100% - 3 * 30.6%) / -3);
+  margin-bottom: 23px;
 }
 .developments__body::after {
   content: "";
@@ -24,10 +26,13 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  width: 30.6%;
-  margin-right: calc((100% - 3 * 30.6%) / 3);
-  margin-bottom: 8px;
+  width: var(--width-dev-event-card);
+  height: auto;
+  margin-bottom: 22px;
   border: 1px solid #cacaca;
+}
+.developments__event-card:not(:nth-child(3n+3)) {
+  margin-right: calc((100% - 3 * var(--width-dev-event-card)) / 2);
 }
 
 .event-card,
@@ -43,7 +48,7 @@
 .event-card__img {
   width: 100%;
   object-fit: cover;
-  margin-bottom: 15px;
+  margin-bottom: 11px;
 }
 
 .event-card__body {
@@ -110,4 +115,4 @@
 }
 .developments-slider__pagination {
   display: none;
-}
+} 

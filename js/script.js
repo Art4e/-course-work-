@@ -3,6 +3,7 @@
   document.addEventListener('DOMContentLoaded', () => {
 
     const swiperHead = new Swiper('.hero__slider', {
+
       autoplay: {
         delay: 3000,
         autoplayDisableOnInteraction: false,
@@ -44,6 +45,21 @@
 
     })();
 
+    // Установка брекпоинта (bpUse) в режиме-'max-width', для выполнения функции(exeFn)
+    const setBreakPoint = (bpUse, exeFn) => {
+      const breakPoint = window.matchMedia(`(max-width:${bpUse}px)`);
+      const bpChecker = function () {
+        if (breakPoint.matches) {
+          exeFn(true);
+        } else if (!breakPoint.matches) {
+          exeFn(false);
+        }
+      };
+
+      breakPoint.addListener(bpChecker);
+      bpChecker();
+    };
+
     // Изменяем положение поиска на брекпоинте 1050
     ; (() => {
       const formSearchEl = document.querySelector('.js-header__search'),
@@ -55,16 +71,16 @@
         document.body.offsetWidth, document.documentElement.offsetWidth,
         document.body.clientWidth, document.documentElement.clientWidth
       );
-      const movingFormSearch = (e) => {
-        if (e.matches) {
+
+      if (pageWidth <= SIZE_SCRIN) inContainerSearchEl.append(formSearchEl);
+
+      setBreakPoint(SIZE_SCRIN, (booleanEl) => {
+        if (booleanEl) {
           inContainerSearchEl.append(formSearchEl);
         } else {
           outContainerSearchEl.append(formSearchEl);
         };
-      };
-
-      if (pageWidth <= SIZE_SCRIN) inContainerSearchEl.append(formSearchEl);
-      window.matchMedia(`(max-width: ${SIZE_SCRIN}px)`).addListener(movingFormSearch);
+      })
     })();
 
     // ToolTip
@@ -137,57 +153,85 @@
       createToolTip(`.projects__text`)
     })();
 
-    // Отобразить или скыть карточки "Сообытия" после первой "линии событий"
+    // Отобразить или скыть карточки "СОБЫТИЯ" после первой "линии событий"
     ; (() => {
       const buttonEl = document.querySelector('.js-event-card__btn');
-      const developmentsEl = document.querySelectorAll('.developments__event-card');
+      const devAllCard = document.querySelectorAll('.developments__event-card');
 
-      developmentsEl.forEach(el => {
-        console.log(el.offsetTop)
-        console.log(developmentsEl[ 0 ].offsetTop)
-        if (el.offsetTop !== developmentsEl[ 0 ].offsetTop) {
-          el.classList.add('deactivated');
-        };
-      });
-
-      const deactivatedEl = document.querySelectorAll('.deactivated');
-
-      buttonEl.addEventListener('click', () => {
-        deactivatedEl.forEach(el => {
-          el.classList.toggle('deactivated');
+      const setClassDeactivated = (elAll, deactiv = false) => {
+        elAll.forEach(el => {
+          el.classList.remove('deactivated');
+          if (!deactiv && el.offsetTop !== elAll[0].offsetTop) {
+            el.classList.add('deactivated');
+          };
         });
-      });
-    })();
-    // Слайдер карточек -  "Сообытия"
-    const swiperDevelopments = new Swiper('.developments-slider', {
-      // effect: 'fade',
-      slidesPerView: 1,
-      slidesPerGroup: 1,
-      pagination: {
-        el: '.developments-slider__pagination',
-        bulletElement: 'button',
-        clickable: true,
-      }
-    });
-    console.log(window.innerWidth > 650)
-    window.innerWidth > 650 ? swiperDevelopments.destroy() : swiperDevelopments.init();
+      };
 
-    // слайдер галерея
-    const swiperGallery = new Swiper('.gallery-slider', {
+      setClassDeactivated(devAllCard);
+      const aaa = () => {
+        const deactivatedEl = document.querySelectorAll('.deactivated');
+
+        if (deactivatedEl.length === 0) {
+          setClassDeactivated(devAllCard);
+        } else if (deactivatedEl.length !== 0) {
+          setClassDeactivated(devAllCard, true);
+        };
+      };
+
+      buttonEl.addEventListener('click', aaa);
+
+      const BP_DEVELOPMENTS = 1000;
+      setBreakPoint(BP_DEVELOPMENTS, () => setClassDeactivated(devAllCard));
+
+      //СЛАЙДЕР - СОБЫТИЯ -----------------------------------------------------------------------------
+      const swiperDevelopmentsSettings = {
+        // autoHeight: 'true',
+        slidesPerView: 1,
+        slidesPerGroup: 1,
+        pagination: {
+          el: '.developments-slider__pagination',
+          bulletElement: 'button',
+          clickable: true,
+        },
+        observer: true,
+        observeParents: true,
+        observeSlideChildren: true
+      };
+
+      const slider = document.querySelector('.developments-slider');
+      const BP_DEVELOPMENTS_SWIPER = 650;
+      let swiperDevelopments;
+
+      setBreakPoint(BP_DEVELOPMENTS_SWIPER, (bpCheck) => {
+        if (bpCheck && slider.dataset.mobile === 'false') {
+          swiperDevelopments = new Swiper('.developments-slider', swiperDevelopmentsSettings);
+          slider.dataset.mobile = 'true';
+        } else {
+          slider.dataset.mobile = 'false';
+          if (slider.classList.contains('swiper-container-initialized')) {
+            swiperDevelopments.destroy();
+            setClassDeactivated(devAllCard);
+          }
+        };
+      })
+    })();
+
+    //СЛАЙДЕР - ГАЛЕРЕЯ -----------------------------------------------------------------------------
+    const swiperGallerySettings = {
       breakpoints: {
-        1600: {
+        1601: {
           slidesPerView: 3,
           slidesPerGroup: 3,
           slidesPerColumn: 2,
           spaceBetween: 50
         },
-        1001: {
+        1000: {
           slidesPerView: 2,
           slidesPerGroup: 2,
           slidesPerColumn: 2,
           spaceBetween: 40
         },
-        800: {
+        801: {
           slidesPerView: 3,
           slidesPerGroup: 3,
           slidesPerColumn: 2,
@@ -200,7 +244,8 @@
           spaceBetween: 30
         },
         320: {
-          slidesPerView: 1
+          slidesPerView: 1,
+          slidesPerColumn: 1
         }
       },
       navigation: {
@@ -215,13 +260,29 @@
         el: '.slider__pagination',
         clickable: true,
         type: 'fraction'
+      },
+      on: {
+        resize: function () {
+          this.update()
+        }
       }
-    });
+    }
+    //---------------- инициализации слайдера
+    let swiperGallery = new Swiper('.gallery-slider', swiperGallerySettings);
+    // перезапуск 
+    const BP_GALLERY = 650;
+    setBreakPoint(BP_GALLERY, (bpCheck) => {
+      if (bpCheck) {
+        swiperGallery.destroy();
+      } else {
+        swiperGallery.destroy();
+        swiperGallery = new Swiper('.gallery-slider', swiperGallerySettings);
+      };
+    })
 
-    // слайдер издания
-    const swiperEdition = new Swiper('.edition-slider ', {
+    //СЛАЙДЕР - ИЗДАНИЯ -----------------------------------------------------------------------------
+    const swiperEditionSettings = {
       breakpoints: {
-
         1201: {
           slidesPerView: 3,
           slidesPerGroup: 3,
@@ -255,11 +316,36 @@
         el: '.edition-slider__pagination',
         clickable: true,
         type: 'fraction'
+      },
+      on: {
+        resize: function () {
+          this.update();
+        }
       }
-    });
+    };
+    // const swiperEdition = new Swiper('.edition-slider ', swiperEditionSettings)
 
-    // слайдер - партнеры
-    const swiperPartners = new Swiper('.projects-slider', {
+    const sliderEd = document.querySelector(`.edition-slider`);
+    const BP_EDITION_SWIPER = 650;
+    let swiperEdition;
+
+    setBreakPoint(BP_EDITION_SWIPER, (bpCheck) => {
+      console.log(!bpCheck && sliderEd.dataset.mobile === `true`)
+
+      if (!bpCheck && sliderEd.dataset.mobile === `true`) {
+        console.log(!bpCheck, sliderEd.dataset.mobile)
+        swiperEdition = new Swiper(`.edition-slider`, swiperEditionSettings);
+        sliderEd.dataset.mobile = `false`;
+      } else {
+        sliderEd.dataset.mobile = `true`;
+        if (sliderEd.classList.contains(`swiper-container-initialized`)) {
+          swiperEdition.destroy();
+        }
+      };
+    })
+
+    //СЛАЙДЕР - ПАРТНЕРЫ -----------------------------------------------------------------------------
+    const swiperPartnersSettings = {
       breakpoints: {
         1200: {
           slidesPerView: 3,
@@ -287,21 +373,65 @@
       a11y: {
         prevSlideMessage: 'Предыдущий слайд',
         nextSlideMessage: 'Следующий слайд'
+      },
+      on: {
+        resize: function () {
+          this.update();
+        }
       }
-    });
+    }
+    const swiperPartners = new Swiper('.projects-slider', swiperPartnersSettings);
 
-    // выбор элементов select, применение к ним Choices
-    ; (() => {
-      const selectAllEl = document.querySelectorAll('select');
-      if (!selectAllEl) return;
-      selectAllEl.forEach(el => {
-        const realism = new Choices(el, {
-          searchEnabled: false,
-          shouldSort: false,
-          itemSelectText: '',
+    // Фильтр категории(раздел ИЗДАНИЯ) включается на разрешении max-650
+    const catFilterEl = document.querySelector(`.js-cat-filter`);
+    const filterBodyEl = document.querySelector(`.js-filter-body`);
+    const checItemAllEl = filterBodyEl.querySelectorAll('li');
+    const toggleClassCatEl = () => {
+      catFilterEl.classList.toggle(`_activ`);
+      filterBodyEl.classList.toggle(`_activ`);
+    };
+    const toggleClassItemEl = (element) => {
+      let el = null;
+      element.currentTarget === undefined ? el = element : el = element.currentTarget;
+
+      if (el.querySelector(`input[type=checkbox]`).checked) {
+        el.classList.add(`_activ`);
+      } else {
+        el.classList.remove(`_activ`);
+      };
+    };
+
+    const BP_CAT = 650;
+    setBreakPoint(BP_CAT, (bpCheck) => {
+      if (bpCheck) {
+        catFilterEl.addEventListener(`click`, toggleClassCatEl);
+        checItemAllEl.forEach(checItem => {
+          toggleClassItemEl(checItem);
+          checItem.addEventListener(`click`, toggleClassItemEl);
         });
-      });
-    })();
+      } else {
+        catFilterEl.classList.remove(`_activ`);
+        filterBodyEl.classList.remove(`_activ`);
+        checItemAllEl.forEach(item => { item.classList.remove(`_activ`) });
+        catFilterEl.removeEventListener(`click`, toggleClassCatEl);
+        checItemAllEl.forEach(checItem => {
+          checItem.removeEventListener(`click`, toggleClassItemEl);
+        });
+      };
+    })
+
+      // выбор элементов select, применение к ним Choices
+      ; (() => {
+        const selectAllEl = document.querySelectorAll('select');
+        if (!selectAllEl) return;
+        selectAllEl.forEach(el => {
+          const realism = new Choices(el, {
+            searchEnabled: false,
+            shouldSort: false,
+            itemSelectText: '',
+          });
+        });
+      })();
 
     // Создаем аккардион
     crteatAccordion('.col-right__header');
@@ -321,7 +451,7 @@
   ymaps.ready(init);
   function init() {
     let myMap = new ymaps.Map("custom__map", {
-      center: [ 55.7584, 37.6010 ],
+      center: [55.7584, 37.6010],
       zoom: 15,
       controls: [],
     });
@@ -330,13 +460,13 @@
       myMap.behaviors.disable('drag');
     }
 
-    let myGeoObject = new ymaps.Placemark([ 55.758463, 37.601079 ], {
+    let myGeoObject = new ymaps.Placemark([55.758463, 37.601079], {
 
     }, {
       iconLayout: 'default#image',
       iconImageHref: './img/contacts/marker.svg',
-      iconImageSize: [ 20, 20 ],
-      iconImageOffset: [ -10, -10 ]
+      iconImageSize: [20, 20],
+      iconImageOffset: [-10, -10]
     });
 
     // Размещение геообъекта на карте.
