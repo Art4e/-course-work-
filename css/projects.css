@@ -33,7 +33,7 @@
 .projects__tooltip:hover::after,
 .projects__tooltip:focus::after {
   background-color: var(--link-hover);
- border-color: var(--main-highlight-color);
+  border-color: var(--main-highlight-color);
 }
 .projects__tooltip._activ::before {
   position: absolute;
@@ -171,6 +171,7 @@
 
 .projects-slider__slide-link {
   display: flex;
+  justify-content: center;
   align-self: center;
 }
 
