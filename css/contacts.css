@@ -60,9 +60,10 @@
 }
 
 .request__btn {
-  width: 155px;
+  max-width: 157px;
   margin-bottom: 28px;
-  padding: 18px 20px;
+  padding-top: 18px;
+  padding-bottom: 18px;
   color: var(--main-highlight-color);
   font-weight: 700;
 }
@@ -70,7 +71,6 @@
 .form__links {
   display: flex;
   margin-top: 7px;
-  /* justify-content: start; */
 }
 
 .links__item {

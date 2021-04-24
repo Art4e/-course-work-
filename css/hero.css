@@ -6,6 +6,7 @@
 
 .hero__slider {
   position: absolute;
+  overflow: hidden;
   content: "";
   top: 0;
   left: 0;

@@ -3,13 +3,17 @@
   document.addEventListener('DOMContentLoaded', () => {
 
     const swiperHead = new Swiper('.hero__slider', {
-
       autoplay: {
         delay: 3000,
         autoplayDisableOnInteraction: false,
       },
       loop: true,
-      effect: 'fade'
+      effect: 'fade',
+      on: {
+        resize: function () {
+          this.update()
+        }
+      }
     });
 
     // Открываем, закрываем бургер меню
@@ -161,7 +165,7 @@
       const setClassDeactivated = (elAll, deactiv = false) => {
         elAll.forEach(el => {
           el.classList.remove('deactivated');
-          if (!deactiv && el.offsetTop !== elAll[ 0 ].offsetTop) {
+          if (!deactiv && el.offsetTop !== elAll[0].offsetTop) {
             el.classList.add('deactivated');
           };
         });
@@ -244,7 +248,9 @@
         },
         320: {
           slidesPerView: 1,
-          slidesPerColumn: 1
+          slidesPerGroup: 1,
+          slidesPerColumn: 1,
+          spaceBetween: 0
         }
       },
       navigation: {
@@ -267,12 +273,14 @@
       }
     }
     //---------------- инициализации слайдера
-    let swiperGallery = new Swiper('.gallery-slider', swiperGallerySettings);
+    let swiperGallery;
     // перезапуск 
     const BP_GALLERY = 650;
     setBreakPoint(BP_GALLERY, (bpCheck) => {
+      swiperGallery = new Swiper('.gallery-slider', swiperGallerySettings);
       if (bpCheck) {
         swiperGallery.destroy();
+        swiperGallery = new Swiper('.gallery-slider', swiperGallerySettings);
       } else {
         swiperGallery.destroy();
         swiperGallery = new Swiper('.gallery-slider', swiperGallerySettings);
@@ -447,7 +455,7 @@
   ymaps.ready(init);
   function init() {
     let myMap = new ymaps.Map("custom__map", {
-      center: [ 55.7584, 37.6010 ],
+      center: [55.7584, 37.6010],
       zoom: 15,
       controls: [],
     });
@@ -456,13 +464,13 @@
       myMap.behaviors.disable('drag');
     }
 
-    let myGeoObject = new ymaps.Placemark([ 55.758463, 37.601079 ], {
+    let myGeoObject = new ymaps.Placemark([55.758463, 37.601079], {
 
     }, {
       iconLayout: 'default#image',
       iconImageHref: './img/contacts/marker.svg',
-      iconImageSize: [ 20, 20 ],
-      iconImageOffset: [ -10, -10 ]
+      iconImageSize: [20, 20],
+      iconImageOffset: [-10, -10]
     });
 
     // Размещение геообъекта на карте.
