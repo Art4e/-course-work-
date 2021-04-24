@@ -1,0 +1,118 @@
+:root {
+  --width-dev-event-card: 31.6%;
+}
+.developments {
+  margin-bottom: 84px;
+  overflow-anchor: none;
+}
+
+.developments__header {
+  margin-bottom: 19px;
+}
+
+.developments__body {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 23px;
+}
+.developments__body::after {
+  content: "";
+  flex: auto;
+}
+
+.developments__event-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: var(--width-dev-event-card);
+  height: auto;
+  margin-bottom: 22px;
+  border: 1px solid #cacaca;
+}
+.developments__event-card:not(:nth-child(3n+3)) {
+  margin-right: calc((100% - 3 * var(--width-dev-event-card)) / 2);
+}
+
+.event-card,
+.event-card__body {
+  padding: 0;
+  margin: 0;
+}
+
+.event-card {
+  width: 100%;
+}
+
+.event-card__img {
+  width: 100%;
+  object-fit: cover;
+  margin-bottom: 11px;
+}
+
+.event-card__body {
+  padding: 0 49px 0 45px;
+}
+
+.event-card__signature {
+  display: block;
+  margin-right: -33px;
+  margin-bottom: 4px;
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  text-align: right;
+  color: #999;
+}
+
+.event-card__header {
+  margin-right: -2px;
+  line-height: 1.3;
+  margin-bottom: 3px;
+}
+
+.event-card__text {
+  margin-bottom: 21px;
+}
+
+.event-card__link {
+  margin-left: 49px;
+  line-height: 1.7;
+  margin-bottom: 45px;
+}
+
+.event-card__link:visited,
+.event-card__link {
+  border-bottom: 1px solid var(--main-highlight-color);
+  color: var(--main-highlight-color);
+}
+
+.event-card__link:focus {
+  outline: var(--link-focus-outline);
+}
+
+.event-card__link:hover {
+  font-weight: 700;
+}
+
+.event-card__link:active {
+  color: var(--link-focus);
+}
+
+.event-card__btn {
+  display: flex;
+  margin: 0 auto;
+  padding: 18px 34px;
+  letter-spacing: 0.5px;
+  color: var(--main-highlight-color);
+}
+.btn-interaction.event-card__btn:hover,
+.btn-interaction.event-card__btn:active {
+  color: var(--fonts-secondary-color);
+}
+.deactivated {
+  display: none;
+}
+.developments-slider__pagination {
+  display: none;
+} 
