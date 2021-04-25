@@ -1,0 +1,202 @@
+<section class="edition section">
+  <div class="container container_edition">
+    <div class="edition__categories categories">
+      <h2 class="edition__header first-header" id="edition">
+        Издания
+      </h2>
+      <h3 class="categories__head categories__head_filter second-header js-cat-filter">Категории:</h3>
+      <ul class="categories__body js-filter-body">
+        <li class="categories__item">
+          <input class="categories__checkbox" type="checkbox" id="Best-sellers" name="Best-sellers"
+            value="Best-sellers">
+          <label class="categories__label" for="Best-sellers" tabindex="-1">Бестселлеры</label>
+          <span class="categories__marker"></span>
+        </li>
+        <li class="categories__item">
+          <input class="categories__checkbox" type="checkbox" id="Art" name="Art" value="Art">
+          <span class="categories__marker"></span>
+          <label class="categories__label" tabindex="-1" for="Art">Искусство</label>
+        </li>
+        <li class="categories__item">
+          <input class="categories__checkbox" type="checkbox" id="Architecture" name="Architecture"
+            value="Architecture">
+          <span class="categories__marker"></span>
+          <label class="categories__label" tabindex="-1" for="Architecture">Архитектура</label>
+        </li>
+        <li class="categories__item">
+          <input class="categories__checkbox" type="checkbox" id="Design" name="Design" value="Design">
+          <span class="categories__marker"></span>
+          <label class="categories__label" tabindex="-1" for="Design">Дизайн</label>
+        </li>
+        <li class="categories__item">
+          <input class="categories__checkbox" type="checkbox" id="Fashion" name="Fashion" value="Fashion">
+          <span class="categories__marker"></span>
+          <label class="categories__label" tabindex="-1" for="Fashion">Мода</label>
+        </li>
+        <li class="categories__item">
+          <input class="categories__checkbox" type="checkbox" id="Children" name="Children" value="Children">
+          <span class="categories__marker"></span>
+          <label class="categories__label" tabindex="-1" for="Children">Детям</label>
+        </li>
+        <li class="categories__item">
+          <input class="categories__checkbox" type="checkbox" id="Fiction" name="Fiction" value="Fiction">
+          <span class="categories__marker"></span>
+          <label class="categories__label" tabindex="-1" for="Fiction">Художественная литература</label>
+        </li>
+        <li class="categories__item">
+          <input class="categories__checkbox" type="checkbox" id="Journalism" name="Journalism" value="Journalism">
+          <span class="categories__marker"></span>
+          <label class="categories__label" tabindex="-1" for="Journalism">Публицистика</label>
+        </li>
+        <li class="categories__item">
+          <input class="categories__checkbox" type="checkbox" id="Travel" name="Travel guides" value="Travel guides">
+          <span class="categories__marker"></span>
+          <label class="categories__label" tabindex="-1" for="Travel">Путеводители</label>
+        </li>
+        <li class="categories__item">
+          <input class="categories__checkbox" type="checkbox" id="Philosophy" name="Philosophy" value="Philosophy">
+          <span class="categories__marker"></span>
+          <label class="categories__label" tabindex="-1" for="Philosophy">Философия</label>
+        </li>
+        <li class="categories__item">
+          <input class="categories__checkbox" type="checkbox" id="Educational" name="Educational literature"
+            value="Educational literature">
+          <span class="categories__marker"></span>
+          <label class="categories__label" tabindex="-1" for="Educational">Учебная литература</label>
+        </li>
+        <li class="categories__item">
+          <input class="categories__checkbox" type="checkbox" id="Magazines" name="Magazines and newspapers"
+            value="Magazines and newspapers">
+          <span class="categories__marker"></span>
+          <label class="categories__label" tabindex="-1" for="Magazines">Журналы и газеты</label>
+        </li>
+      </ul>
+    </div>
+    <div class="edition__price categories">
+      <h3 class="categories__head categories__head_price second-header">Цена</h3>
+      <div class="price__body">
+        <label class="price__label" for="price-from">От</label>
+        <input class="price__input" type="text" id="price-from" name="price-from" placeholder="50">
+        <label class="price__label" for="price-to">до</label>
+        <input class="price__input" type="text" id="price-to" name="price-to" placeholder="25 000">
+        <span class="price__label">рублей</span>
+      </div>
+    </div>
+    <div class="edition__slider">
+      <div class="slider__navigation slider__navigation_edition">
+        <div class="edition-slider-btn-prev swiper-button-prev"></div>
+        <div class="slider__pagination edition-slider__pagination"></div>
+        <div class="edition-slider-btn-next swiper-button-next"></div>
+      </div>
+      <div class="edition-slider swiper-container" data-mobile="true">
+        <ul class="edition-slider__slides swiper-wrapper">
+          <li class="swiper-slide edition__item">
+            <div class="edition-card">
+              <img class="edition-card__img" src="./img/edition/edition-1.jpg" alt="Репрадукция картины">
+              <div class="edition-card__body">
+                <div class="edition-card__text">
+                  <span class="edition-card__header second-header">Искусство цвета</span>
+                  Иттен, Иоханнес
+                </div>
+                <div class="edition-card__price">620 руб</div>
+              </div>
+              <button class="edition-card__btn btn btn-interaction">
+                <span>Заказать</span>
+              </button>
+            </div>
+          </li>
+          <li class="swiper-slide edition__item">
+            <div class="edition-card">
+              <img class="edition-card__img" src="./img/edition/edition-02.jpg" alt="Репрадукция картины">
+              <div class="edition-card__body">
+                <div class="edition-card__text">
+                  <span class="edition-card__header second-header">Типографика</span>
+                  Рудер, Эмиль
+                </div>
+                <div class="edition-card__price">2 450 руб</div>
+              </div>
+              <button class="edition-card__btn btn btn-interaction">
+                <span>Заказать</span>
+              </button>
+            </div>
+          </li>
+          <li class="swiper-slide edition__item">
+            <div class="edition-card">
+              <img class="edition-card__img" src="./img/edition/edition-03.jpg" alt="Репрадукция картины">
+              <div class="edition-card__body">
+                <div class="edition-card__text">
+                  <span class="edition-card__header second-header">Книга про буквы</span>
+                  Гордон, Юрий
+                </div>
+                <div class="edition-card__price">2 200 руб</div>
+              </div>
+              <button class="edition-card__btn btn btn-interaction">
+                <span>Заказать</span>
+              </button>
+            </div>
+          </li>
+          <li class="swiper-slide edition__item">
+            <div class="edition-card">
+              <img class="edition-card__img" src="./img/edition/edition-04.jpg" alt="Репрадукция картины">
+              <div class="edition-card__body">
+                <div class="edition-card__text">
+                  <span class="edition-card__header second-header">Николай Ильин</span>
+                  Кричевский, Владимир
+                </div>
+                <div class="edition-card__price">1 100 руб</div>
+              </div>
+              <button class="edition-card__btn btn btn-interaction">
+                <span>Заказать</span>
+              </button>
+            </div>
+          </li>
+          <li class="swiper-slide edition__item">
+            <div class="edition-card">
+              <img class="edition-card__img" src="./img/edition/edition-05.jpg" alt="Репрадукция картины">
+              <div class="edition-card__body">
+                <div class="edition-card__text">
+                  <span class="edition-card__header second-header">Модульные сетки в граф...</span>
+                  Мюллер-Брокманн, Йозеф
+                </div>
+                <div class="edition-card__price">1 450 руб</div>
+              </div>
+              <button class="edition-card__btn btn btn-interaction">
+                <span>Заказать</span>
+              </button>
+            </div>
+          </li>
+          <li class="swiper-slide edition__item">
+            <div class="edition-card">
+              <img class="edition-card__img" src="./img/edition/edition-06.jpg" alt="Репрадукция картины">
+              <div class="edition-card__body">
+                <div class="edition-card__text">
+                  <span class="edition-card__header second-header">Эволюция графических ст...</span>
+                  Хеллер, Чваст
+                </div>
+                <div class="edition-card__price">3 200 руб</div>
+              </div>
+              <button class="edition-card__btn btn btn-interaction">
+                <span>Заказать</span>
+              </button>
+            </div>
+          </li>
+          <li class="swiper-slide edition__item">
+            <div class="edition-card">
+              <img class="edition-card__img" src="./img/edition/edition-07.jpg" alt="Репрадукция картины">
+              <div class="edition-card__body">
+                <div class="edition-card__text">
+                  <span class="edition-card__header second-header">Искусство и визуальное в...</span>
+                  Арнхейм, Рудольф
+                </div>
+                <div class="edition-card__price">2 200 руб</div>
+              </div>
+              <button class="edition-card__btn btn btn-interaction">
+                <span>Заказать</span>
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

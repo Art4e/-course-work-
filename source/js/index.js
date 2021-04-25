@@ -1,7 +1,5 @@
 //= modules/swiper-bundle.min.js"
 
-//= modules/tabsmenu.js"
-
 //= modules/accordeon.js"
 
 //= modules/choices.min.js"

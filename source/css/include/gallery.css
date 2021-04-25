@@ -225,6 +225,57 @@
   opacity: 1;
 }
 
-.gallery-slider__item:hover {
-  /* border: 2px solid #fff; */
+/*.gallery-slider__item:hover {
+   border: 2px solid #fff; 
+}*/
+
+
+/* Настройки модального окна */
+.gallery__modal-wrapper{
+  position: fixed;
+  z-index: 1500;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+}
+.gallery__modal{
+  position: relative;
+  margin: 50% auto;
+  min-width: 290px;
+  height: 100px;
+  padding: 10px;
+  background: #fff;
+  transform: translateY(-50%);
+}
+.gallery__modal-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+}
+.gallery__modal-btn::before, 
+.gallery__modal-btn::after {
+  position: absolute;
+  content: "";
+  left: 50%;
+  width: 27px;
+  height: 1px;
+  background: #000;
+  transform-origin: center;
+}
+.gallery__modal-btn::before {
+  top: 50%;
+  transform: translate(-50%) rotate(45deg);
+}
+.gallery__modal-btn::after {
+  bottom: 50%;
+  transform: translate(-50%) rotate(-45deg);
 }
