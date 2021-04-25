@@ -165,7 +165,7 @@
       const setClassDeactivated = (elAll, deactiv = false) => {
         elAll.forEach(el => {
           el.classList.remove('deactivated');
-          if (!deactiv && el.offsetTop !== elAll[0].offsetTop) {
+          if (!deactiv && el.offsetTop !== elAll[ 0 ].offsetTop) {
             el.classList.add('deactivated');
           };
         });
@@ -424,7 +424,7 @@
       };
     })
 
-      // выбор элементов select, применение к ним Choices
+      // Раздел gallery (фильтр) - выбор элементов select, применение к ним Choices
       ; (() => {
         const selectAllEl = document.querySelectorAll('select');
         if (!selectAllEl) return;
@@ -455,7 +455,7 @@
   ymaps.ready(init);
   function init() {
     let myMap = new ymaps.Map("custom__map", {
-      center: [55.7584, 37.6010],
+      center: [ 55.7584, 37.6010 ],
       zoom: 15,
       controls: [],
     });
@@ -464,13 +464,13 @@
       myMap.behaviors.disable('drag');
     }
 
-    let myGeoObject = new ymaps.Placemark([55.758463, 37.601079], {
+    let myGeoObject = new ymaps.Placemark([ 55.758463, 37.601079 ], {
 
     }, {
       iconLayout: 'default#image',
       iconImageHref: './img/contacts/marker.svg',
-      iconImageSize: [20, 20],
-      iconImageOffset: [-10, -10]
+      iconImageSize: [ 20, 20 ],
+      iconImageOffset: [ -10, -10 ]
     });
 
     // Размещение геообъекта на карте.

@@ -35,8 +35,6 @@ const webp = require(`gulp-webp`);
 
 // -------- Babel обработка JS
 const babel = require(`gulp-babel`)
-// const @babel/core = require(`@babel/core`)
-// const @babel/preset-env = require(`@babel/preset-env`)
 const babelLoader = require(`babel-loader`)
 
 // -------- Сервер 
@@ -134,7 +132,7 @@ const scripts = () => {
     .pipe(gulpif(!argv.build, sourceMaps.init()))
     .pipe(rigger())
     .pipe(babel({
-      presets: [`@babel/env`]
+      presets: [ `@babel/env` ]
     }))
     .pipe(gulpif(argv.build, uglify().on(`error`, notify.onError())))
     .pipe(gulpif(!argv.build, sourceMaps.write()))
@@ -209,7 +207,7 @@ const icons = () => {
 
 // -------- Удаляем папки dev и build прежде чесм собрать обновлённую сборку
 const delAll = () => {
-  return del([path.clean.dev, path.clean.build])
+  return del([ path.clean.dev, path.clean.build ])
 }
 
 // -------- Следим за изменениями в файлах
