@@ -829,6 +829,11 @@
     margin-bottom: 0;
     padding-left: 0;
   }
+  .gallery__modal{
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+  .ga
   .catalog__header {
     line-height: 1.3;
     margin-bottom: 0px;

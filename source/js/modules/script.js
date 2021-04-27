@@ -90,6 +90,7 @@
     // Модальное окно - увеличенная репродукция с описанием
     const conteinerImg = document.querySelector(`.js-gallery-img`);
     const conteinerModal = document.querySelector(`.js-gallery-modal`);
+    const modalEl = conteinerModal.querySelector(`figure`);
     const btnClosedEl = conteinerModal.querySelector(`button`);
 
 
@@ -100,13 +101,18 @@
       const dateData = selectedImgEl.dataset.date;
       const descriptionData = selectedImgEl.dataset.description;
 
-      conteinerModal.style.display = `block`;
-      console.log(selectedImgEl.getAttribute(`src`));
+      conteinerModal.classList.add(`_visible`);
+      modalEl.classList.add(`_visible`);
 
-      conteinerModal.querySelector(`img`).setAttribute(`src`, selectedImgEl.getAttribute(`src`))
+      conteinerModal.querySelector(`img`).setAttribute(`src`, selectedImgEl.getAttribute(`src`));
+      conteinerModal.querySelector(`.gallery__modal-author`).innerHTML = authorData;
+      conteinerModal.querySelector(`.gallery__modal-work`).innerHTML = workData;
+      conteinerModal.querySelector(`.gallery__modal-date`).innerHTML = dateData;
+      conteinerModal.querySelector(`.gallery__modal-description`).innerHTML = descriptionData;
 
       btnClosedEl.addEventListener(`click`, () => {
-        conteinerModal.removeAttribute(`style`);
+        conteinerModal.classList.remove(`_visible`);
+        modalEl.classList.remove(`_visible`);
       });
     });
 
