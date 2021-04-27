@@ -3,7 +3,7 @@
 !/#source/img/**/*.*
 # 06_bundlers/node_modules/**/*.*
 /node_modules/*
-/build/*
+# /build/*
 /dev/*
 # Игнорирование логов 
 logs 
