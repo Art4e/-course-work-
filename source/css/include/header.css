@@ -154,7 +154,7 @@
 }
 
 .header__news-line {
-  /* display: none; */
+  display: none;
   width: 363px;
   margin-right: 100px;
 }

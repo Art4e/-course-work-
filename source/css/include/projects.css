@@ -50,7 +50,7 @@
   content: "";
   display: block;
   bottom: -100%;
-  width: 300px;
+  /* width: 250px; */
   padding: 5px;
   left: 50%;
   background-color: #cacaca;

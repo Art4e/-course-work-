@@ -95,7 +95,7 @@
 
 
     conteinerImg.addEventListener(`click`, (ev) => {
-      const selectedImgEl = ev.target.children[0];
+      const selectedImgEl = ev.target.children[ 0 ];
       const authorData = selectedImgEl.dataset.author;
       const workData = selectedImgEl.dataset.work;
       const dateData = selectedImgEl.dataset.date;
@@ -144,15 +144,15 @@
             viewportWindow < 351 ? widthTollTipeEl = 250 : widthTollTipeEl = 350;
 
             if (leftEl < widthTollTipeEl / 2) {
-              paddingLeftEl = widthTollTipeEl / 2 - leftEl - widthEl;
-              return `${paddingLeftEl}px`;
+              paddingLeftEl = widthTollTipeEl / 2 - leftEl;
+              return { lEl: `${paddingLeftEl}px`, wEl: `${widthTollTipeEl}px` };
             };
 
             if (viewportWindow - leftEl - widthEl < widthTollTipeEl / 2) {
-              paddingLeftEl = viewportWindow - leftEl - widthTollTipeEl / 2;
-              return `${paddingLeftEl}px`;
+              paddingLeftEl = viewportWindow - leftEl - widthEl - widthTollTipeEl / 2;
+              return { lEl: `${paddingLeftEl}px`, wEl: `${widthTollTipeEl}px` };
             };
-            return `auto`;
+            return { lEl: `auto`, wEl: `${widthTollTipeEl}px` };
           };
 
           if (e === ev.currentTarget) {
@@ -168,7 +168,7 @@
               if (contentTT && !ttBodyEl) {
                 resetToolTipEl();
                 e.classList.add(`_activ`);
-                e.innerHTML = `<span class="tooltip-body" style="left:${getLeft()}">${contentTT}</span>`;
+                e.innerHTML = `<span class="tooltip-body" style="left:${getLeft().lEl};width:${getLeft().wEl};">${contentTT}</span>`;
 
                 clearInterval(timerId);
                 timerId = setInterval(() => {
@@ -195,14 +195,14 @@
       const setClassDeactivated = (elAll, deactiv = false) => {
         elAll.forEach(el => {
           el.classList.remove('deactivated');
-          if (!deactiv && el.offsetTop !== elAll[0].offsetTop) {
+          if (!deactiv && el.offsetTop !== elAll[ 0 ].offsetTop) {
             el.classList.add('deactivated');
           };
         });
       };
 
       setClassDeactivated(devAllCard);
-      const aaa = () => {
+      buttonEl.addEventListener('click', () => {
         const deactivatedEl = document.querySelectorAll('.deactivated');
 
         if (deactivatedEl.length === 0) {
@@ -210,9 +210,7 @@
         } else if (deactivatedEl.length !== 0) {
           setClassDeactivated(devAllCard, true);
         };
-      };
-
-      buttonEl.addEventListener('click', aaa);
+      });
 
       const BP_DEVELOPMENTS = 1000;
       setBreakPoint(BP_DEVELOPMENTS, () => setClassDeactivated(devAllCard));
@@ -520,7 +518,7 @@
       const tabsmenu = document.querySelectorAll(tabMenuNode);
       if (!tabsmenu) return;
       const content = document.querySelector(tabContainerNode);
-      const activDefaultBlockEl = content.querySelectorAll('.tab__item')[0];
+      const activDefaultBlockEl = content.querySelectorAll('.tab__item')[ 0 ];
 
       activDefaultBlockEl.style.display = 'block';
 
@@ -548,8 +546,8 @@
       const removeAttr = (elemensAll, element, indexEl) => {
         element.setAttribute(`data-tab-switch`, `false`);
         element.classList.remove(`activ`);
-        elemensAll[indexEl].setAttribute(`data-tab-open`, `false`);
-        elemensAll[indexEl].classList.remove(`activ`);
+        elemensAll[ indexEl ].setAttribute(`data-tab-open`, `false`);
+        elemensAll[ indexEl ].classList.remove(`activ`);
       };
 
       tabSwitchAllEl.forEach((el, index) => {
@@ -572,8 +570,8 @@
           el.classList.add(`activ`);
 
           setTimeout(() => {
-            tabAllEl[index].setAttribute(`data-tab-open`, `true`);
-            tabAllEl[index].classList.add(`activ`)
+            tabAllEl[ index ].setAttribute(`data-tab-open`, `true`);
+            tabAllEl[ index ].classList.add(`activ`)
           }, 20)
         })
       })
@@ -586,7 +584,7 @@
   ymaps.ready(init);
   function init() {
     let myMap = new ymaps.Map("custom__map", {
-      center: [55.7584, 37.6010],
+      center: [ 55.7584, 37.6010 ],
       zoom: 15,
       controls: [],
     });
@@ -595,13 +593,13 @@
       myMap.behaviors.disable('drag');
     }
 
-    let myGeoObject = new ymaps.Placemark([55.758463, 37.601079], {
+    let myGeoObject = new ymaps.Placemark([ 55.758463, 37.601079 ], {
 
     }, {
       iconLayout: 'default#image',
       iconImageHref: './img/contacts/marker.svg',
-      iconImageSize: [20, 20],
-      iconImageOffset: [-10, -10]
+      iconImageSize: [ 20, 20 ],
+      iconImageOffset: [ -10, -10 ]
     });
 
     // Размещение геообъекта на карте.

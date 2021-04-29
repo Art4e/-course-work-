@@ -344,6 +344,9 @@
     font-weight: 600;
     margin-left: -2px;
   }
+  .header__news-line {
+    display: block;
+  }
 
   .logo__img {
     width: 188px;
