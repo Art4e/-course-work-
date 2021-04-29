@@ -226,45 +226,45 @@
 }
 
 /* Настройки модального окна */
-.gallery__modal-wrapper{
+.gallery__modal-wrapper {
   z-index: 1500;
-	position: fixed;
-	left: 0;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.7);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
-	width: 100%;
-	opacity: 0;
-	visibility: hidden;
-	transition: all 0.3s ease-in-out;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
 }
-.gallery__modal{
+.gallery__modal {
   position: relative;
-	display: none;
+  display: none;
   /* flex-wrap: wrap; */
-	align-items: center;
-	justify-content: center;
-	background-color: #fff;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
   max-height: 80vh;
   color: #000;
 }
-.gallery__modal>img{
+.gallery__modal > img {
   /* width: 100%;*/
-  height: 100%; 
+  height: 100%;
   object-fit: cover;
 }
 .gallery__modal-wrapper._visible {
-	opacity: 1;
-	visibility: visible;
-	transition: all 0.3s ease-in-out;
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.3s ease-in-out;
 }
 .gallery__modal._visible {
-	display: flex;
+  display: flex;
 }
 .gallery__modal-btn {
   z-index: 1510;
@@ -277,8 +277,9 @@
   padding: 0;
   border: none;
   background: none;
+  cursor: pointer;
 }
-.gallery__modal-btn::before, 
+.gallery__modal-btn::before,
 .gallery__modal-btn::after {
   position: absolute;
   content: "";

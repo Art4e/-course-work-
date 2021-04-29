@@ -91,7 +91,7 @@
     const conteinerImg = document.querySelector(`.js-gallery-img`);
     const conteinerModal = document.querySelector(`.js-gallery-modal`);
     const modalEl = conteinerModal.querySelector(`figure`);
-    const btnClosedEl = conteinerModal.querySelector(`button`);
+    const btnClosedEl = conteinerModal.querySelector(`a`);
 
 
     conteinerImg.addEventListener(`click`, (ev) => {
@@ -110,7 +110,8 @@
       conteinerModal.querySelector(`.gallery__modal-date`).innerHTML = dateData;
       conteinerModal.querySelector(`.gallery__modal-description`).innerHTML = descriptionData;
 
-      btnClosedEl.addEventListener(`click`, () => {
+      btnClosedEl.addEventListener(`click`, (ev) => {
+        ev.preventDefault();
         conteinerModal.classList.remove(`_visible`);
         modalEl.classList.remove(`_visible`);
       });
