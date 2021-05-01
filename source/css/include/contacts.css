@@ -20,7 +20,7 @@
 
 .contacts__colum-left_address {
   padding-bottom: 20px;
-  padding-top: 116px;
+  padding-top: 112px;
   border-top: 1px solid #cacaca;
 }
 .contacts__map {
@@ -70,7 +70,7 @@
 
 .form__links {
   display: flex;
-  margin-top: 7px;
+  margin-top: 12px;
 }
 
 .links__item {
@@ -87,12 +87,12 @@
 
 .links__link_whatsapp {
   border-radius: 50%;
-  background-color: #30BF39;
+  background-color: #30bf39;
 }
 
 .links__link_telegram {
   border-radius: 50%;
-  background-color: #2AABEE;
+  background-color: #2aabee;
 }
 
 .contacts__map {
