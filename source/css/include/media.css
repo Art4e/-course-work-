@@ -1,6 +1,6 @@
 @media (max-width: 1920px) {
-  :root {
-    --container-padding: calc(12.28vw - 75.714px);
+  .container {
+    max-width: calc(74.71vw + 165.52px);
   }
   .menu__item {
     margin-right: calc(5.56vw - 41.667px);
@@ -15,7 +15,7 @@
   }
 
   .hero__solutions {
-    padding-right: calc(83.04vw - 586.29px);
+    padding-right: calc(82.03vw - 575px);
   }
 
   .block-text {
@@ -292,8 +292,8 @@
 }
 
 @media (max-width: 1050px) {
-  :root {
-    --container-padding: 50px;
+  .container {
+    max-width: calc(100vw - 100px);
   }
   .body_lock {
     position: relative;
@@ -472,6 +472,9 @@
 
   .hero__slide-3 {
     background: url("../img/hero/hero-3-768.jpg") 50% / cover no-repeat;
+  }
+  .hero__solutions {
+    padding-right: calc(95.7vw - 735px);
   }
   .gallery__container {
     padding-bottom: 83px;
@@ -718,8 +721,8 @@
 }
 
 @media (max-width: 650px) {
-  :root {
-    --container-padding: calc(10.91vw - 20.909px);
+  .container {
+    max-width: calc(78.55vw + 38.64px);
   }
   .first-header {
     font-size: calc(6.06vw + 8.6061px);
@@ -760,7 +763,7 @@
   }
   .header__menu {
     height: 100vh;
-    padding: var(--container-padding);
+    /* padding: var(--container-padding); */
     justify-content: flex-start;
   }
   .menu__items {
@@ -894,7 +897,7 @@
     height: 100%;
   }
   .gallery-slider .slider__navigation {
-    margin-top: 17px;
+    margin-top: 20px;
     margin-bottom: 0;
     padding-left: 0;
   }
@@ -1091,13 +1094,13 @@
   }
   .edition__item {
     width: 45%;
-    margin-bottom: 50px;
+    margin-bottom: 49px;
   }
   .edition__item:not(:nth-child(2n + 2)) {
     margin-right: 10%;
   }
   .edition-card__img {
-    margin-bottom: 7px;
+    margin-bottom: 9px;
   }
   .edition-card__body {
     margin-bottom: 12px;
