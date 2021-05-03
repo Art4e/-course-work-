@@ -95,7 +95,8 @@
 
 
     conteinerImg.addEventListener(`click`, (ev) => {
-      const selectedImgEl = ev.target.children[ 0 ];
+      const bodyEl = document.querySelector('body');
+      const selectedImgEl = ev.target.children[0];
       const authorData = selectedImgEl.dataset.author;
       const workData = selectedImgEl.dataset.work;
       const dateData = selectedImgEl.dataset.date;
@@ -103,6 +104,7 @@
 
       conteinerModal.classList.add(`_visible`);
       modalEl.classList.add(`_visible`);
+      bodyEl.classList.add('body_lock');
 
       conteinerModal.querySelector(`img`).setAttribute(`src`, selectedImgEl.getAttribute(`src`));
       conteinerModal.querySelector(`.gallery__modal-author`).innerHTML = authorData;
@@ -114,6 +116,7 @@
         ev.preventDefault();
         conteinerModal.classList.remove(`_visible`);
         modalEl.classList.remove(`_visible`);
+        bodyEl.classList.remove('body_lock');
       });
     });
 
@@ -196,7 +199,7 @@
       const setClassDeactivated = (elAll, deactiv = false) => {
         elAll.forEach(el => {
           el.classList.remove('deactivated');
-          if (!deactiv && el.offsetTop !== elAll[ 0 ].offsetTop) {
+          if (!deactiv && el.offsetTop !== elAll[0].offsetTop) {
             el.classList.add('deactivated');
           };
         });
@@ -519,7 +522,7 @@
       const tabsmenu = document.querySelectorAll(tabMenuNode);
       if (!tabsmenu) return;
       const content = document.querySelector(tabContainerNode);
-      const activDefaultBlockEl = content.querySelectorAll('.tab__item')[ 0 ];
+      const activDefaultBlockEl = content.querySelectorAll('.tab__item')[0];
 
       activDefaultBlockEl.style.display = 'block';
 
@@ -547,8 +550,8 @@
       const removeAttr = (elemensAll, element, indexEl) => {
         element.setAttribute(`data-tab-switch`, `false`);
         element.classList.remove(`activ`);
-        elemensAll[ indexEl ].setAttribute(`data-tab-open`, `false`);
-        elemensAll[ indexEl ].classList.remove(`activ`);
+        elemensAll[indexEl].setAttribute(`data-tab-open`, `false`);
+        elemensAll[indexEl].classList.remove(`activ`);
       };
 
       tabSwitchAllEl.forEach((el, index) => {
@@ -571,8 +574,8 @@
           el.classList.add(`activ`);
 
           setTimeout(() => {
-            tabAllEl[ index ].setAttribute(`data-tab-open`, `true`);
-            tabAllEl[ index ].classList.add(`activ`)
+            tabAllEl[index].setAttribute(`data-tab-open`, `true`);
+            tabAllEl[index].classList.add(`activ`)
           }, 20)
         })
       })
@@ -585,7 +588,7 @@
   ymaps.ready(init);
   function init() {
     let myMap = new ymaps.Map("custom__map", {
-      center: [ 55.7584, 37.6010 ],
+      center: [55.7584, 37.6010],
       zoom: 15,
       controls: [],
     });
@@ -594,13 +597,13 @@
       myMap.behaviors.disable('drag');
     }
 
-    let myGeoObject = new ymaps.Placemark([ 55.758463, 37.601079 ], {
+    let myGeoObject = new ymaps.Placemark([55.758463, 37.601079], {
 
     }, {
       iconLayout: 'default#image',
       iconImageHref: './img/contacts/marker.svg',
-      iconImageSize: [ 20, 20 ],
-      iconImageOffset: [ -10, -10 ]
+      iconImageSize: [20, 20],
+      iconImageOffset: [-10, -10]
     });
 
     // Размещение геообъекта на карте.
