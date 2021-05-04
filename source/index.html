@@ -62,40 +62,6 @@
             </svg>
             <span>Войти</span>
           </a>
-          <!-- <div class="header__news-line news-line js-header-news">
-            <ul class="news-line__items">
-              <li class="news-line__item">
-                <figure class="news">
-                  <img class="news__img" src="img/header/news/01.jpg" alt="">
-                  <figcaption class="news__body">
-                    <p class="news__data">28 марта, 14:15</p>
-                    <a class="news__link" href="#">Безусловно, реализация намеченных плановых заданий играет важную
-                      роль...</a>
-                  </figcaption>
-                </figure>
-              </li>
-              <li class="news-line__item">
-                <figure class="news">
-                  <img class="news__img" src="img/header/news/02.jpg" alt="">
-                  <figcaption class="news__body">
-                    <p class="news__data">28 марта, 13:01</p>
-                    <a class="news__link" href="#">Безусловно, реализация намеченных плановых заданий играет важную
-                      роль...</a>
-                  </figcaption>
-                </figure>
-              </li>
-              <li class="news-line__item">
-                <figure class="news">
-                  <img class="news__img" src="img/header/news/03.jpg" alt="">
-                  <figcaption class="news__body">
-                    <p class="news__data">28 марта, 12:44</p>
-                    <a class="news__link" href="#">Безусловно, реализация намеченных плановых заданий играет важную
-                      роль...</a>
-                  </figcaption>
-                </figure>
-              </li>
-            </ul>
-          </div> -->
         </div>
       </div>
     </div>
@@ -232,16 +198,24 @@
       <h2 class="first-header first-header_contacts container" id="contacts">Контакты</h2>
       <div class="contacts__body">
         <div class="contacts__colum-left contacts__colum-left_address">
-          <h3 class="second-header second-header_contacts">Шоурум №4</h3>
+          <h3 class="second-header second-header__contacts">Шоурум №4</h3>
           <p>Леонтьевский переулок, дом 5, строение 1</p>
         </div>
         <div class="contacts__colum-left contacts__colum-left_form">
           <form autocomplete="on" method="POST" class="form" id="contacts__form">
-            <h3 class="second-header second-header_form">Заказать обратный звонок</h3>
-            <label class="visually-hidden" for="name">Как вас зовут?</label>
-            <input class="request__input btn" required type="text" id="name" name="name" placeholder="Имя*">
-            <label class="visually-hidden" for="phone">Укажите ваш телефон</label>
-            <input class="request__input btn" required type="tel" id="phone" name="phone" placeholder="Телефон*">
+            <h3 class="second-header second-header__form">Заказать обратный звонок</h3>
+            <input type="hidden" name="admin_email[]" value="art4e@ya.ru">
+            <input type="hidden" name="form_subject" value="Тема письма">
+            <label class="form__label">
+              <span class="visually-hidden">Как вас зовут?</span>
+              <input class="request__input btn" required type="text" id="name" name="name" placeholder="Имя*"
+                data-validate-field="name">
+            </label>
+            <label class="form__label">
+              <span class="visually-hidden">Укажите ваш телефон</span>
+              <input class="request__input btn" required type="tel" id="phone" name="phone" placeholder="Телефон*"
+                data-validate-field="phone">
+            </label>
             <button type="submit" class="request__btn btn">Заказать</button>
             <h3 class="second-header second-header__link">Связаться в один клик</h3>
             <ul class="form__links">

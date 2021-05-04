@@ -1164,15 +1164,15 @@
     order: 2;
     margin-bottom: 30px;
   }
-  .second-header_contacts,
-  .second-header_form,
+  .second-header__contacts,
+  .second-header__form,
   .second-header__link {
     font-size: 18px;
   }
-  .second-header_form {
+  .second-header__form {
     margin-bottom: 15px;
   }
-  .second-header_contacts {
+  .second-header__contacts {
     line-height: 1;
     margin-bottom: -2px;
   }

@@ -33,7 +33,7 @@
   /* Chrome 19+ & Safari 6+ */
 }
 
-.second-header_contacts {
+.second-header__contacts {
   margin-bottom: -5px;
 }
 
@@ -47,16 +47,28 @@
   letter-spacing: -0.5px;
 }
 
-.second-header_contacts {
-}
-
-.second-header_form {
+.second-header__form {
   margin-bottom: 8px;
 }
-
+.form__label {
+margin: 0;
+padding: 0;
+}
+.form__label {
+  position: relative;
+}
 .request__input {
+  width: 100%;
   padding: 9px 20px;
   margin-bottom: 20px;
+  color: #333;
+
+}
+.js-validate-error-label {
+  position: absolute;
+  bottom: -0%;
+  left: 5%;
+  font-size: 10px;
 }
 
 .request__btn {
@@ -105,9 +117,6 @@
   height: 100%;
 }
 
-/* .ymaps-2-1-77-map ymaps {
-
-} */
 .ymaps-2-1-77-ground-pane {
   filter: grayscale(1);
 }
