@@ -51,8 +51,8 @@
   margin-bottom: 8px;
 }
 .form__label {
-margin: 0;
-padding: 0;
+  margin: 0;
+  padding: 0;
 }
 .form__label {
   position: relative;
@@ -62,7 +62,6 @@ padding: 0;
   padding: 9px 20px;
   margin-bottom: 20px;
   color: #333;
-
 }
 .js-validate-error-label {
   position: absolute;
@@ -123,4 +122,16 @@ padding: 0;
 
 .ymaps-2-1-77-copyrights-pane {
   display: none;
+}
+.contacts__modal-wrapper {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.contacts__modal {
+  flex-direction: column;
+  max-width: 400px;
+  max-height: 30vh;
+  margin: 20px;
+  padding: 30px;
+  background-color: #fff;
+  color: #000;
 }

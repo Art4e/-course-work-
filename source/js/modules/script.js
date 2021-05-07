@@ -87,30 +87,16 @@
       })
     })();
 
-    // Модальное окно - увеличенная репродукция с описанием
-    const conteinerImg = document.querySelector(`.js-gallery-img`);
-    const conteinerModal = document.querySelector(`.js-gallery-modal`);
-    const modalEl = conteinerModal.querySelector(`figure`);
-    const btnClosedEl = conteinerModal.querySelector(`a`);
-
-
-    conteinerImg.addEventListener(`click`, (ev) => {
+    // Модальные окна
+    const addModal = (modalWrapper) => {
+      const conteinerModal = document.querySelector(modalWrapper);
+      const modalEl = conteinerModal.querySelector(`.js-modal`);
+      const btnClosedEl = conteinerModal.querySelector(`.js-modal-close`);
       const bodyEl = document.querySelector('body');
-      const selectedImgEl = ev.target.children[ 0 ];
-      const authorData = selectedImgEl.dataset.author;
-      const workData = selectedImgEl.dataset.work;
-      const dateData = selectedImgEl.dataset.date;
-      const descriptionData = selectedImgEl.dataset.description;
 
       conteinerModal.classList.add(`_visible`);
       modalEl.classList.add(`_visible`);
       bodyEl.classList.add('body_lock');
-
-      conteinerModal.querySelector(`img`).setAttribute(`src`, selectedImgEl.getAttribute(`src`));
-      conteinerModal.querySelector(`.gallery__modal-author`).innerHTML = authorData;
-      conteinerModal.querySelector(`.gallery__modal-work`).innerHTML = workData;
-      conteinerModal.querySelector(`.gallery__modal-date`).innerHTML = dateData;
-      conteinerModal.querySelector(`.gallery__modal-description`).innerHTML = descriptionData;
 
       btnClosedEl.addEventListener(`click`, (ev) => {
         ev.preventDefault();
@@ -118,7 +104,29 @@
         modalEl.classList.remove(`_visible`);
         bodyEl.classList.remove('body_lock');
       });
+      return conteinerModal;
+    };
+
+    // Репродукция с описанием
+    const conteinerImg = document.querySelector(`.js-gallery-img`);
+
+    conteinerImg.addEventListener(`click`, (ev) => {
+      const conteinerModal = addModal(`.js-gallery-modal`);
+
+      const selectedImgEl = ev.target.children[ 0 ];
+      const authorData = selectedImgEl.dataset.author;
+      const workData = selectedImgEl.dataset.work;
+      const dateData = selectedImgEl.dataset.date;
+      const descriptionData = selectedImgEl.dataset.description;
+
+      conteinerModal.querySelector(`img`).setAttribute(`src`, selectedImgEl.getAttribute(`src`));
+      conteinerModal.querySelector(`.gallery__modal-author`).innerHTML = authorData;
+      conteinerModal.querySelector(`.gallery__modal-work`).innerHTML = workData;
+      conteinerModal.querySelector(`.gallery__modal-date`).innerHTML = dateData;
+      conteinerModal.querySelector(`.gallery__modal-description`).innerHTML = descriptionData;
     });
+    // Модалка после отправки заявки в разделе контакты
+    // openModalThanks(successModal)
 
 
     // ToolTip
@@ -582,75 +590,75 @@
     };
     createTab(`.js-catalog__tab`);
 
-  });
 
-  // ----------- маска телефона
-  const inputTelEl = document.querySelectorAll('input[type="tel"]');
-  const im = new Inputmask('+7 (999) 999-99-99');
-  im.mask(inputTelEl);
 
-  // Обработка формы
-  let validateForms = function (selector, rules, successModal, yaGoal) {
-    new window.JustValidate(selector, {
-      rules: rules,
-      submitHandler: function (form) {
-        let formData = new FormData(form);
+    // ----------- маска телефона
+    const inputTelEl = document.querySelectorAll('input[type="tel"]');
+    const im = new Inputmask('+7 (999) 999-99-99');
+    im.mask(inputTelEl);
 
-        let xhr = new XMLHttpRequest();
+    // Обработка формы
+    const validateForms = function (selector, rules, successModal, yaGoal) {
+      new window.JustValidate(selector, {
+        rules: rules,
+        submitHandler: function (form) {
+          const formData = new FormData(form);
+          const xhr = new XMLHttpRequest();
 
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
               console.log('Отправлено');
-            }
+              addModal(successModal);
+            };
           }
+
+          xhr.open('POST', '../mail.php', true);
+          xhr.send(formData);
+
+          form.reset();
+          // addModal(successModal);
+          // fileInput.closest('label').querySelector('span').textContent = 'Прикрепить файл';
         }
-
-        xhr.open('POST', '../mail.php', true);
-        xhr.send(formData);
-
-        form.reset();
-
-        // fileInput.closest('label').querySelector('span').textContent = 'Прикрепить файл';
+      });
+    };
+    const optionsInput = {
+      name: {
+        required: true,
+        minLength: 3
+      },
+      phone: {
+        required: true
       }
-    });
-  };
-  const optionsInput = {
-    name: {
-      required: true,
-      minLength: 3
-    },
-    phone: {
-      required: true
-    }
-  };
+    };
 
-  validateForms('#contacts__form', optionsInput, '.thanks-popup', 'send goal');
+    validateForms(`#contacts__form`, optionsInput, `.js-contacts-modal`, `send goal`);
 
-  // Яндекс карта
-  ymaps.ready(init);
-  function init() {
-    let myMap = new ymaps.Map("custom__map", {
-      center: [ 55.7584, 37.6010 ],
-      zoom: 15,
-      controls: [],
-    });
-    myMap.behaviors.disable('scrollZoom');
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      myMap.behaviors.disable('drag');
-    }
+    // Яндекс карта
+    ymaps.ready(init);
+    function init() {
+      let myMap = new ymaps.Map(`custom__map`, {
+        center: [ 55.7584, 37.6010 ],
+        zoom: 15,
+        controls: [],
+      });
+      myMap.behaviors.disable(`scrollZoom`);
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        myMap.behaviors.disable(`drag`);
+      }
 
-    let myGeoObject = new ymaps.Placemark([ 55.758463, 37.601079 ], {
+      let myGeoObject = new ymaps.Placemark([ 55.758463, 37.601079 ], {
 
-    }, {
-      iconLayout: 'default#image',
-      iconImageHref: './img/contacts/marker.svg',
-      iconImageSize: [ 20, 20 ],
-      iconImageOffset: [ -10, -10 ]
-    });
+      }, {
+        iconLayout: `default#image`,
+        iconImageHref: `./img/contacts/marker.svg`,
+        iconImageSize: [ 20, 20 ],
+        iconImageOffset: [ -10, -10 ]
+      });
 
-    // Размещение геообъекта на карте.
-    myMap.geoObjects.add(myGeoObject);
-  };
+      // Размещение геообъекта на карте.
+      myMap.geoObjects.add(myGeoObject);
+    };
+
+  });
 
 })();

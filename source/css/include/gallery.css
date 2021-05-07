@@ -226,14 +226,13 @@
 }
 
 /* Настройки модального окна */
-.gallery__modal-wrapper {
+.modal-wrapper {
   z-index: 1500;
   position: fixed;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -243,11 +242,17 @@
   visibility: hidden;
   transition: all 0.3s ease-in-out;
 }
-.gallery__modal {
+.modal {
   position: relative;
   display: none;
   align-items: center;
   justify-content: center;
+}
+
+.gallery__modal-wrapper {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.gallery__modal {
   overflow-y: scroll;
   background-color: #fff;
   max-height: 80vh;
@@ -257,15 +262,15 @@
   height: 100%;
   object-fit: cover;
 }
-.gallery__modal-wrapper._visible {
+.modal-wrapper._visible {
   opacity: 1;
   visibility: visible;
   transition: all 0.3s ease-in-out;
 }
-.gallery__modal._visible {
+.modal._visible {
   display: flex;
 }
-.gallery__modal-btn {
+.modal__close {
   z-index: 1510;
   position: absolute;
   top: 10px;
@@ -278,8 +283,8 @@
   background: none;
   cursor: pointer;
 }
-.gallery__modal-btn::before,
-.gallery__modal-btn::after {
+.modal__close::before,
+.modal__close::after {
   position: absolute;
   content: "";
   left: 50%;
@@ -288,11 +293,11 @@
   background: #000;
   transform-origin: center;
 }
-.gallery__modal-btn::before {
+.modal__close::before {
   top: 50%;
   transform: translate(-50%) rotate(45deg);
 }
-.gallery__modal-btn::after {
+.modal__close::after {
   bottom: 50%;
   transform: translate(-50%) rotate(-45deg);
 }
