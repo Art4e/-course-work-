@@ -171,6 +171,7 @@ body {
   font-style: normal;
   line-height: 2;
   color: var(--fonts-primary-color);
+  overflow-anchor: none;
 }
 
 .visually-hidden {
@@ -182,6 +183,15 @@ body {
   height: 1px !important;
   width: 1px !important;
   overflow: hidden;
+}
+.body_lock {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
 }
 
 .container {
@@ -228,6 +238,7 @@ body {
 .link-interaction:active {
   color: var(--link-active) #7943a4;
 }
+
 
 /* Изменение стилей select плагина choices*/
 .choices__inner {

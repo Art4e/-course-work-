@@ -25,15 +25,20 @@
       const burgerMenuEl = headUpEl.querySelector('.js-header__menu');
       const comeInEl = headUpEl.querySelector('.js-come-in');
       const menuLinksEl = headUpEl.querySelectorAll('a');
+
       const toggleActivClass = () => {
         burgerMenuEl.classList.toggle('activ');
-        comeInEl.classList.toggle('btn');
+        burgerBodyEl.classList.toggle('activ');
+        comeInEl.classList.toggle('activ');
         burgerEl.classList.toggle('activ');
         bodyEl.classList.toggle('body_lock');
       };
 
-      menuLinksEl.forEach(el => { if (ev.target === el) toggleActivClass() });
-      if (ev.target == burgerEl || ev.target == burgerBodyEl) toggleActivClass();
+      menuLinksEl.forEach(el => {
+        if (ev.target === el) toggleActivClass()
+      });
+
+      if (ev.target === burgerEl || ev.target === burgerBodyEl) toggleActivClass();
     });
 
     // Открываем нижнее меню
@@ -66,6 +71,17 @@
 
     // Изменяем положение поиска на брекпоинте 1050
     ; (() => {
+      const openSerch = () => {
+        const btnSearchEl = document.querySelector('.js-search__button');
+        const inputSearchEl = document.querySelector('.js-search-input');
+
+        btnSearchEl.addEventListener(`click`, (ev) => {
+          ev.preventDefault();
+          btnSearchEl.classList.toggle(`_activ`);
+          inputSearchEl.classList.toggle(`_activ`);
+        });
+      };
+
       const formSearchEl = document.querySelector('.js-header__search'),
         inContainerSearchEl = document.querySelector('.js-head-up'),
         outContainerSearchEl = document.querySelector('.js-head-down');
@@ -76,15 +92,20 @@
         document.body.clientWidth, document.documentElement.clientWidth
       );
 
-      if (pageWidth <= SIZE_SCRIN) inContainerSearchEl.append(formSearchEl);
+      if (pageWidth <= SIZE_SCRIN) {
+        inContainerSearchEl.append(formSearchEl);
+      };
 
       setBreakPoint(SIZE_SCRIN, (booleanEl) => {
         if (booleanEl) {
           inContainerSearchEl.append(formSearchEl);
+          openSerch();
         } else {
           outContainerSearchEl.append(formSearchEl);
+          // openSerch(formSearchEl);
         };
       })
+
     })();
 
     // Модальные окна
@@ -113,7 +134,7 @@
     conteinerImg.addEventListener(`click`, (ev) => {
       const conteinerModal = addModal(`.js-gallery-modal`);
 
-      const selectedImgEl = ev.target.children[ 0 ];
+      const selectedImgEl = ev.target.children[0];
       const authorData = selectedImgEl.dataset.author;
       const workData = selectedImgEl.dataset.work;
       const dateData = selectedImgEl.dataset.date;
@@ -207,13 +228,14 @@
       const setClassDeactivated = (elAll, deactiv = false) => {
         elAll.forEach(el => {
           el.classList.remove('deactivated');
-          if (!deactiv && el.offsetTop !== elAll[ 0 ].offsetTop) {
+          if (!deactiv && el.offsetTop !== elAll[0].offsetTop) {
             el.classList.add('deactivated');
           };
         });
       };
 
       setClassDeactivated(devAllCard);
+
       buttonEl.addEventListener('click', () => {
         const deactivatedEl = document.querySelectorAll('.deactivated');
 
@@ -222,6 +244,8 @@
         } else if (deactivatedEl.length !== 0) {
           setClassDeactivated(devAllCard, true);
         };
+
+        buttonEl.remove();
       });
 
       const BP_DEVELOPMENTS = 1000;
@@ -466,15 +490,30 @@
 
       // Раздел gallery (фильтр) - выбор элементов select, применение к ним Choices
       ; (() => {
-        const selectAllEl = document.querySelectorAll('select');
-        if (!selectAllEl) return;
-        selectAllEl.forEach(el => {
-          const realism = new Choices(el, {
-            searchEnabled: false,
-            shouldSort: false,
-            itemSelectText: '',
-          });
+        const selectEl = document.querySelector('.js-filter-select');
+        if (!selectEl) return;
+        // selectAllEl.forEach(el => {
+        const realism = new Choices(selectEl, {
+          searchEnabled: false,
+          shouldSort: false,
+          position: 'bottom',
+          itemSelectText: '',
         });
+
+        selectEl.addEventListener(
+          'addItem',
+          function (event) {
+
+            console.log(event);
+            // console.log(event.detail.id);
+            // console.log(event.detail.value);
+            // console.log(event.detail.label);
+            // console.log(event.detail.customProperties);
+            console.log(event.showDropdown);
+          },
+          false,
+        );
+        // });
       })();
 
     // Создаем аккардион
@@ -530,7 +569,7 @@
       const tabsmenu = document.querySelectorAll(tabMenuNode);
       if (!tabsmenu) return;
       const content = document.querySelector(tabContainerNode);
-      const activDefaultBlockEl = content.querySelectorAll('.tab__item')[ 0 ];
+      const activDefaultBlockEl = content.querySelectorAll('.tab__item')[0];
 
       activDefaultBlockEl.style.display = 'block';
 
@@ -558,8 +597,8 @@
       const removeAttr = (elemensAll, element, indexEl) => {
         element.setAttribute(`data-tab-switch`, `false`);
         element.classList.remove(`activ`);
-        elemensAll[ indexEl ].setAttribute(`data-tab-open`, `false`);
-        elemensAll[ indexEl ].classList.remove(`activ`);
+        elemensAll[indexEl].setAttribute(`data-tab-open`, `false`);
+        elemensAll[indexEl].classList.remove(`activ`);
       };
 
       tabSwitchAllEl.forEach((el, index) => {
@@ -582,8 +621,8 @@
           el.classList.add(`activ`);
 
           setTimeout(() => {
-            tabAllEl[ index ].setAttribute(`data-tab-open`, `true`);
-            tabAllEl[ index ].classList.add(`activ`)
+            tabAllEl[index].setAttribute(`data-tab-open`, `true`);
+            tabAllEl[index].classList.add(`activ`)
           }, 20)
         })
       })
@@ -637,7 +676,7 @@
     ymaps.ready(init);
     function init() {
       let myMap = new ymaps.Map(`custom__map`, {
-        center: [ 55.7584, 37.6010 ],
+        center: [55.7584, 37.6010],
         zoom: 15,
         controls: [],
       });
@@ -646,13 +685,13 @@
         myMap.behaviors.disable(`drag`);
       }
 
-      let myGeoObject = new ymaps.Placemark([ 55.758463, 37.601079 ], {
+      let myGeoObject = new ymaps.Placemark([55.758463, 37.601079], {
 
       }, {
         iconLayout: `default#image`,
         iconImageHref: `./img/contacts/marker.svg`,
-        iconImageSize: [ 20, 20 ],
-        iconImageOffset: [ -10, -10 ]
+        iconImageSize: [20, 20],
+        iconImageOffset: [-10, -10]
       });
 
       // Размещение геообъекта на карте.

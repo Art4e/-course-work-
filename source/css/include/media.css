@@ -295,15 +295,6 @@
   .container {
     max-width: calc(100vw - 100px);
   }
-  .body_lock {
-    position: relative;
-    overflow: hidden;
-    height: 100vh;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-  }
   .header {
     display: flex;
   }
@@ -319,32 +310,29 @@
   .burger {
     display: block;
     order: 0;
-    margin-left: -2px;
-    padding-top: 2px;
-    padding-left: 2px;
+    margin-left: 0;
+    padding-top: 0;
   }
 
   .burger.activ::before {
-    display: block;
+    opacity: 0.9;
   }
 
   .header__menu {
     position: fixed;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
     align-content: space-between;
-    top: -200%;
+    top: 300%;
     left: 0;
     right: 0;
-    height: 768px;
+    height: 100vh;
     opacity: 0;
     background: rgba(0, 0, 0, 0.9);
     padding: 50px;
-    -webkit-transition: top 0.3s ease-in-out;
-    transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out 0.1s;
   }
 
   .header__menu.activ {
@@ -378,11 +366,17 @@
     width: 174px;
   }
 
-  .come-in.btn {
+  .come-in.activ {
     margin-left: 0;
     margin-top: 113px;
     padding: 28px 91px 28px 86px;
+    color: var(--fonts-secondary-color);
+    font-size: 1.8rem;
+    font-weight: bold;
     letter-spacing: 1.5px;
+    background: none;
+    border: 2px solid var(--main-highlight-color);
+    border-radius: var(--btn-border-radius);
   }
 
   .come-in__svg {
@@ -393,33 +387,29 @@
     width: 32px;
   }
 
-  .header__search:hover .search__input,
-  .header__search:focus .search__input,
-  .search__input:focus,
-  .search__input:active {
+  .header__search {
+    flex-direction: row-reverse;
+  }
+  
+  .search__input {
+    margin-left: 5px;
+    width: 0;
+    transition: width 0.3s;
+  }
+  .search__input._activ {
     margin-left: 9px;
     width: 180px;
   }
-
-  .search__input {
-    margin-left: 0;
-    width: 0;
-    transition: width 0.5s, margin-left 0.5s;
-    -webkit-transition: width 0.5s, margin-left 0.5s;
-  }
-
   .header__search {
     margin-left: 0;
-    transition: width 0.5s, margin-left 0.5s;
-    -webkit-transition: width 0.5s, margin-left 0.5s;
   }
 
-  .header__search:hover,
-  .header__search:focus,
-  .header__search:focus-within,
-  .header__search:active {
+  /* .header__search._activ:hover,
+  .header__search._activ:focus,
+  .header__search._activ:focus-within, */
+  /* .header__search._activ {
     margin-left: -189px;
-  }
+  }  */
 
   .head-down {
     display: none;

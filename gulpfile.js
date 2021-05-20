@@ -51,13 +51,16 @@ const path = {
   },
   source: { //Пути откуда брать исходники
     html: `source/*.html`, //Синтаксис source/*.html говорит gulp что мы хотим взять все файлы с расширением .html
-    scripts: `source/js/index.js`,//В стилях и скриптах нам понадобятся только main файлы
+    scripts: `source/js/index.js`,//В стилях и скриптах нам понадобятся только main файлы 
+    scriptsPhp: `source/php/**/*.*`,
     style: `source/css/index.css`,
     img: [
       `source/img/**/*.+(png|jpg|webp|jpeg|svg)`,
+      `source/*.ico`,
       `!source/img/src/**`,
       `!source/img/svg/**`
     ],
+    imgIco: `source/*.ico`,
     imgSrc: `/#source/img/**/*.+(png|jpg|jpeg|svg)`,
     webpSrc: `/#source/img/**/*.webp`,
     svg: `source/img/svg/*.svg`,
@@ -66,15 +69,19 @@ const path = {
   dev: { //Kуда складывать файлы dev сборки
     html: `dev/`,
     scripts: `dev/js/`,
+    scriptsPhp: `dev/php/`,
     style: `dev/css/`,
     img: `dev/img/`,
+    imgIco: `dev/`,
     fonts: `dev/fonts/`
   },
   build: { //Kуда складывать файлы build сборки
     html: `build/`,
     scripts: `build/js/`,
+    scriptsPhp: `build/php/`,
     style: `build/css/`,
     img: `build/img/`,
+    imgIco: `build/`,
     fonts: `build/fonts/`
   },
   watch: { //Тут мы укажем, за изменением каких файлов мы хотим наблюдать
@@ -95,6 +102,11 @@ const path = {
 const fontsAll = () => {
   return src(path.source.fonts)
     .pipe(gulpif(argv.build, dest(path.build.fonts), dest(path.dev.fonts)))
+}
+// -------- Перенос php
+const scriptsPhp = () => {
+  return src(path.source.scriptsPhp)
+    .pipe(gulpif(argv.build, dest(path.build.scriptsPhp), dest(path.dev.scriptsPhp)))
 }
 
 // -------- Обработка HTML файлов
@@ -132,7 +144,7 @@ const scripts = () => {
     .pipe(gulpif(!argv.build, sourceMaps.init()))
     .pipe(rigger())
     .pipe(babel({
-      presets: [ `@babel/env` ]
+      presets: [`@babel/env`]
     }))
     .pipe(gulpif(argv.build, uglify().on(`error`, notify.onError())))
     .pipe(gulpif(!argv.build, sourceMaps.write()))
@@ -201,13 +213,13 @@ const images = () => {
     .pipe(gulpif(argv.build, dest(path.build.img), dest(path.dev.img)))
 }
 const icons = () => {
-  return src(`source/favicon.ico`)
-    .pipe(gulpif(argv.build, dest(path.build.html), dest(path.dev.html)))
+  return src(path.source.imgIco)
+    .pipe(gulpif(argv.build, dest(path.build.imgIco), dest(path.dev.imgIco)))
 }
 
 // -------- Удаляем папки dev и build прежде чесм собрать обновлённую сборку
 const delAll = () => {
-  return del([ path.clean.dev, path.clean.build ])
+  return del([path.clean.dev, path.clean.build])
 }
 
 // -------- Следим за изменениями в файлах
@@ -219,4 +231,4 @@ watch(path.watch.fonts, fontsAll)
 
 // --------  Сборка по умолчанию dev, запуск - gulp 
 // --------  Сборка по build, запуск - gulp --build
-exports.default = series(delAll, fontsAll, htmlMinify, styles, svgSpriteBuild, images, scripts, watchFailes)
+exports.default = series(delAll, fontsAll, icons, htmlMinify, styles, svgSpriteBuild, images, scripts, scriptsPhp, watchFailes)

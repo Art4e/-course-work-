@@ -24,6 +24,7 @@
 
 .burger,
 .head-up__search {
+  position: relative;
   display: none;
   z-index: 2000;
   background-color: transparent;
@@ -36,13 +37,14 @@
 .burger::before {
   position: absolute;
   content: "";
-  display: none;
-  z-index: 1500;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: -50%;
+  left: -237%;
+  width: 100vw;
+  bottom: -50%;
+  pointer-events: none;
   background-color: #000;
-  height: 0px;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
 .head-up__search {
@@ -52,8 +54,11 @@
 
 .burger__body {
   display: block;
-  position: relative;
-  z-index: 2000;
+  position: absolute;
+  /* z-index: 2000; */
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
 }
 
 .burger__body:before,
@@ -61,8 +66,24 @@
 .burger__body:after {
   height: 3px;
   background: #fff;
-  -webkit-transition: background 0.3s ease-in-out;
-  transition: background var(--delay-animation), transform var(--delay-animation);
+  transform-origin: 50% 50%;
+  transition: background 0.2s 0.2s;
+}
+.burger__body {
+  width: 28px;
+  transition-duration: 0.2s;
+  transition-delay: 0.2s;
+  transition-property: width;
+}
+.burger__body:before {
+  transition-duration: 0.2s, 0.2s;
+  transition-delay: 0.2s, 0s;
+  transition-property: top, transform;
+  }
+.burger__body:after {
+  transition-duration: 0.2s, 0.1s, 0.2s;
+  transition-delay: 0.2s, 0.2s, 0s;
+  transition-property: bottom, width, transform;
 }
 
 .burger__body:before,
@@ -71,37 +92,39 @@
   content: "";
   left: 0;
 }
-
-.burger__body {
-  width: 28px;
+.burger__body.activ {
+  transition-delay: 0s;
+  width: 0;
 }
 
 .burger__body:before {
-  top: -12px;
+  top: -14px;
   width: 36px;
-  transform-origin: 50% 0;
 }
-
 .burger__body:after {
-  bottom: -12px;
-  width: 24px;
-  transform-origin: 50% 100%;
+  bottom: -14px;
+  width: 22px;
 }
 
-.burger.activ .burger__body {
-  height: 0;
-}
-
-.burger.activ .burger__body:before {
-  top: -2px;
-  width: 34px;
+.burger__body.activ:before {
+  top: 0;
   transform: rotate(45deg);
+  width: 36px;
 }
-
-.burger.activ .burger__body:after {
+.burger__body.activ:after {
   bottom: 0;
-  width: 34px;
   transform: rotate(-45deg);
+  width: 36px;
+}
+.burger__body.activ:before ,
+.burger__body.activ:after {
+  width: 34px;
+}
+.burger__body.activ:before {
+  transition-delay: 0s, 0.2s;
+  }
+.burger__body.activ:after {
+  transition-delay: 0s, 0s, 0.2s ;
 }
 
 .burger:hover .burger__body:before,
@@ -219,13 +242,13 @@
 .menu-item__head::after {
   content: "";
   position: absolute;
-  top: 15px;
-  right: -1px;
+  top: 45%;
+  right: 5px;
   width: 7px;
   height: 7px;
   border-bottom: 1px solid #fff;
   border-right: 1px solid #fff;
-  transform: rotate(45deg) translateY(50%);
+  transform: rotate(45deg) translateY(-50%);
   transition: transform var(--delay-animation), border var(--delay-animation);
 }
 
@@ -240,8 +263,9 @@
   outline: none;
 }
 
+.head-down__menu-item.activ:hover > .menu-item__head::after,
 .head-down__menu-item.activ:focus > .menu-item__head::after {
-  transform: rotate(225deg) translateY(-120%) translateX(-30%);
+  transform: rotate(-135deg);
 }
 
 .head-down__menu-item:focus {
@@ -254,12 +278,6 @@
   visibility: visible;
   transition: opacity 0.5s visibility 0.5s;
 }
-
-/* .menu-item__head.activ + .menu-item__body {
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.5s visibility 0.5s;
-} */
 
 .menu-item__body {
   position: absolute;
@@ -349,6 +367,12 @@
 .impressionism .autor__item:nth-child(4) {
   background: url("../img/header/dropdown/2-4.jpg") 50% / cover no-repeat;
 }
+.impressionism .autor__item:nth-child(5) {
+  background: url("../img/header/dropdown/3-3.jpg") 50% / cover no-repeat;
+}
+.impressionism .autor__item:nth-child(6) {
+  background: url("../img/header/dropdown/2-1.jpg") 50% / cover no-repeat;
+}
 
 .post-impressionism .autor__item:nth-child(1) {
   background: url("../img/header/dropdown/3-1.jpg") 50% / cover no-repeat;
@@ -364,6 +388,10 @@
 
 .post-impressionism .autor__item:nth-child(4) {
   background: url("../img/header/dropdown/3-4.jpg") 50% / cover no-repeat;
+}
+
+.post-impressionism .autor__item:nth-child(5) {
+  background: url("../img/header/dropdown/3-3.jpg") 50% / cover no-repeat;
 }
 
 .vanguard .autor__item:nth-child(1) {
