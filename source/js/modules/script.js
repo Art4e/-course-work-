@@ -2,6 +2,14 @@
 
   document.addEventListener('DOMContentLoaded', () => {
 
+    const setPaddingToBody = (delPadding = false) => {
+      const lockPaddingValue = `${window.innerWidth - document.querySelector(`.header`).offsetWidth}px`;
+      const bodyEl = document.querySelector(`body`);
+      if (delPadding) {
+        bodyEl.style.paddingRight = null
+      } else bodyEl.style.paddingRight = lockPaddingValue;
+    };
+
     const swiperHead = new Swiper('.hero__slider', {
       autoplay: {
         delay: 3000,
@@ -31,6 +39,7 @@
         burgerBodyEl.classList.toggle('activ');
         comeInEl.classList.toggle('activ');
         burgerEl.classList.toggle('activ');
+        !!bodyEl.classList.contains('body_lock') ? setPaddingToBody(true) : setPaddingToBody();
         bodyEl.classList.toggle('body_lock');
       };
 
@@ -77,8 +86,15 @@
 
         btnSearchEl.addEventListener(`click`, (ev) => {
           ev.preventDefault();
-          btnSearchEl.classList.toggle(`_activ`);
-          inputSearchEl.classList.toggle(`_activ`);
+          if (btnSearchEl.classList.contains(`_activ`)) {
+            btnSearchEl.classList.remove(`_activ`);
+            inputSearchEl.classList.remove(`_activ`);
+            inputSearchEl.blur()
+          } else {
+            btnSearchEl.classList.add(`_activ`);
+            inputSearchEl.classList.add(`_activ`);
+            inputSearchEl.focus()
+          }
         });
       };
 
@@ -115,18 +131,45 @@
       const btnClosedEl = conteinerModal.querySelector(`.js-modal-close`);
       const bodyEl = document.querySelector('body');
 
-      conteinerModal.classList.add(`_visible`);
-      modalEl.classList.add(`_visible`);
-      bodyEl.classList.add('body_lock');
+      const togflStyleModal = (styleAdd = true) => {
+        if (styleAdd) {
+          conteinerModal.classList.add(`_visible`);
+          modalEl.classList.add(`_visible`);
+          setPaddingToBody();
+          bodyEl.classList.add('body_lock');
+        }
+        if (!styleAdd) {
+          conteinerModal.classList.remove(`_visible`);
+          modalEl.classList.remove(`_visible`);
+          setPaddingToBody(true);
+          bodyEl.classList.remove('body_lock');
+        }
+      }
 
-      btnClosedEl.addEventListener(`click`, (ev) => {
+      togflStyleModal()
+
+      conteinerModal.addEventListener(`click`, (ev) => {
         ev.preventDefault();
-        conteinerModal.classList.remove(`_visible`);
-        modalEl.classList.remove(`_visible`);
-        bodyEl.classList.remove('body_lock');
+        if (ev.target === btnClosedEl) {
+          togflStyleModal(false)
+        }
+        if (!ev.target.closest(`.js-modal`)) {
+          togflStyleModal(false)
+        }
       });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.code === 'Escape') togflStyleModal(false);
+      })
+
       return conteinerModal;
     };
+
+    // const setPaddingToBody = () => {
+    //   lockPaddingValue = `${window.innerWidth - document.querySelector(`.header`).offsetWidth}px`
+    //   console.log(lockPaddingValue);
+    //   body.style.paddingRight = lockPaddingValue;
+    // }
 
     // Репродукция с описанием
     const conteinerImg = document.querySelector(`.js-gallery-img`);
@@ -134,7 +177,7 @@
     conteinerImg.addEventListener(`click`, (ev) => {
       const conteinerModal = addModal(`.js-gallery-modal`);
 
-      const selectedImgEl = ev.target.children[0];
+      const selectedImgEl = ev.target.children[ 0 ];
       const authorData = selectedImgEl.dataset.author;
       const workData = selectedImgEl.dataset.work;
       const dateData = selectedImgEl.dataset.date;
@@ -228,7 +271,7 @@
       const setClassDeactivated = (elAll, deactiv = false) => {
         elAll.forEach(el => {
           el.classList.remove('deactivated');
-          if (!deactiv && el.offsetTop !== elAll[0].offsetTop) {
+          if (!deactiv && el.offsetTop !== elAll[ 0 ].offsetTop) {
             el.classList.add('deactivated');
           };
         });
@@ -304,7 +347,13 @@
           slidesPerColumn: 2,
           spaceBetween: 50
         },
-        651: {
+        // 651: {
+        //   slidesPerView: 2,
+        //   slidesPerGroup: 2,
+        //   slidesPerColumn: 2,
+        //   spaceBetween: 30
+        // },
+        451: {
           slidesPerView: 2,
           slidesPerGroup: 2,
           slidesPerColumn: 2,
@@ -317,6 +366,8 @@
           spaceBetween: 0
         }
       },
+      touchEventsTarget: 'wrapper',
+      grabCursor: true,
       navigation: {
         nextEl: '.slider-button-next',
         prevEl: '.slider-button-prev'
@@ -339,12 +390,12 @@
     //---------------- инициализации слайдера
     let swiperGallery;
     // перезапуск 
-    const BP_GALLERY = 650;
+    const BP_GALLERY = 450;
     setBreakPoint(BP_GALLERY, (bpCheck) => {
       swiperGallery = new Swiper('.gallery-slider', swiperGallerySettings);
       if (bpCheck) {
         swiperGallery.destroy();
-        swiperGallery = new Swiper('.gallery-slider', swiperGallerySettings);
+        // swiperGallery = new Swiper('.gallery-slider', swiperGallerySettings);
       } else {
         swiperGallery.destroy();
         swiperGallery = new Swiper('.gallery-slider', swiperGallerySettings);
@@ -569,7 +620,7 @@
       const tabsmenu = document.querySelectorAll(tabMenuNode);
       if (!tabsmenu) return;
       const content = document.querySelector(tabContainerNode);
-      const activDefaultBlockEl = content.querySelectorAll('.tab__item')[0];
+      const activDefaultBlockEl = content.querySelectorAll('.tab__item')[ 0 ];
 
       activDefaultBlockEl.style.display = 'block';
 
@@ -591,19 +642,28 @@
     creatTab('.js-tabs-menu-bel', ".js-tabs-container-bel");
 
     const createTab = (dataTabsEl) => {
+
+      // window.scrollTo({ top: outBlockValue, behavior: "smooth" });
+
       const tabsEl = document.querySelector(dataTabsEl);
       const tabSwitchAllEl = tabsEl.querySelectorAll(`[data-tab-switch]`);
       const tabAllEl = tabsEl.querySelectorAll(`[data-tab-open]`);
+
       const removeAttr = (elemensAll, element, indexEl) => {
         element.setAttribute(`data-tab-switch`, `false`);
         element.classList.remove(`activ`);
-        elemensAll[indexEl].setAttribute(`data-tab-open`, `false`);
-        elemensAll[indexEl].classList.remove(`activ`);
+        elemensAll[ indexEl ].setAttribute(`data-tab-open`, `false`);
+        elemensAll[ indexEl ].classList.remove(`activ`);
       };
 
       tabSwitchAllEl.forEach((el, index) => {
         el.addEventListener(`click`, (ev) => {
           ev.preventDefault();
+          // const developmentsEl = document.querySelector(`#developments`);
+          // console.log(developmentsEl);
+          // const devePageYOffset = developmentsEl.getBoundingClientRect().top + pageYOffset;
+          // console.log(devePageYOffset);
+
           const el = ev.currentTarget;
 
           if (el.getAttribute(`data-tab-switch`) === `true`) {
@@ -621,9 +681,9 @@
           el.classList.add(`activ`);
 
           setTimeout(() => {
-            tabAllEl[index].setAttribute(`data-tab-open`, `true`);
-            tabAllEl[index].classList.add(`activ`)
-          }, 20)
+            tabAllEl[ index ].setAttribute(`data-tab-open`, `true`);
+            tabAllEl[ index ].classList.add(`activ`)
+          }, 10)
         })
       })
     };
@@ -676,7 +736,7 @@
     ymaps.ready(init);
     function init() {
       let myMap = new ymaps.Map(`custom__map`, {
-        center: [55.7584, 37.6010],
+        center: [ 55.7584, 37.6010 ],
         zoom: 15,
         controls: [],
       });
@@ -685,18 +745,28 @@
         myMap.behaviors.disable(`drag`);
       }
 
-      let myGeoObject = new ymaps.Placemark([55.758463, 37.601079], {
+      let myGeoObject = new ymaps.Placemark([ 55.758463, 37.601079 ], {
 
       }, {
         iconLayout: `default#image`,
         iconImageHref: `./img/contacts/marker.svg`,
-        iconImageSize: [20, 20],
-        iconImageOffset: [-10, -10]
+        iconImageSize: [ 20, 20 ],
+        iconImageOffset: [ -10, -10 ]
       });
 
       // Размещение геообъекта на карте.
       myMap.geoObjects.add(myGeoObject);
     };
+
+    (function (ELEMENT) {
+      ELEMENT.matches = ELEMENT.matches || ELEMENT.mozMatchesSelector || ELEMENT.msMatchesSelector || ELEMENT.oMatchesSelector || ELEMENT.webkitMatchesSelector;
+      ELEMENT.closest = ELEMENT.closest || function closest(selector) {
+        if (!this) return null;
+        if (this.matches(selector)) return this;
+        if (!this.parentElement) { return null }
+        else return this.parentElement.closest(selector)
+      };
+    }(Element.prototype));
 
   });
 

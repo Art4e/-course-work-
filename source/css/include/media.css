@@ -390,7 +390,7 @@
   .header__search {
     flex-direction: row-reverse;
   }
-  
+
   .search__input {
     margin-left: 5px;
     width: 0;
@@ -403,14 +403,6 @@
   .header__search {
     margin-left: 0;
   }
-
-  /* .header__search._activ:hover,
-  .header__search._activ:focus,
-  .header__search._activ:focus-within, */
-  /* .header__search._activ {
-    margin-left: -189px;
-  }  */
-
   .head-down {
     display: none;
   }
@@ -464,7 +456,12 @@
     flex-direction: row;
     height: 100%;
   }
-
+  .select-first > .choices.is-open {
+    margin-bottom: 150px;
+  }
+  .select-first > .choices {
+    transition: margin-bottom 0.3s ease;
+  }
   .body__filter {
     order: -1;
     padding-right: 58%;
@@ -644,7 +641,7 @@
     padding-right: 52px;
   }
   .request__input {
-    margin-bottom: 21px;
+    margin-bottom: 10px;
   }
   .request__btn {
     margin-bottom: 30px;
@@ -750,12 +747,12 @@
     padding-left: 2px;
     line-height: 5.2rem;
     font-size: 1.6rem;
-}
+  }
   .come-in__svg {
     margin-right: 5px;
     width: 9px;
   }
-  .come-in.btn {
+  .come-in.activ {
     margin-left: 0;
     margin-top: 18px;
     padding: 18px 29px 18px 31px;
@@ -838,53 +835,6 @@
     font-size: 14px;
     letter-spacing: 0.1px;
   }
-
-  .gallery__container {
-    padding-top: 33px;
-    padding-bottom: 82px;
-  }
-  .gallery__header {
-    margin-left: 0;
-    margin-bottom: 0;
-    line-height: 2.5;
-  }
-
-  .body__filter {
-    padding-right: 0;
-  }
-  .select-last {
-    margin-bottom: 36px;
-  }
-  .filter__header {
-    margin-bottom: 6px;
-  }
-  .gallery__body_left-colum {
-    width: 100%;
-  }
-
-  .gallery-slider.swiper-container {
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-    min-width: 0;
-    margin-bottom: 18px;
-  }
-  .gallery-slider.swiper-container > .swiper-wrapper {
-    height: auto;
-  }
-  .swiper-slide.gallery-slider__img {
-    height: 100%;
-  }
-  .gallery-slider .slider__navigation {
-    margin-top: 20px;
-    margin-bottom: 0;
-    padding-left: 0;
-  }
-  .gallery__modal {
-    flex-wrap: wrap;
-    max-width: 100%;
-  }
-
   .catalog__header {
     line-height: 1.3;
     margin-bottom: 0px;
@@ -960,6 +910,7 @@
     width: 10px;
     height: 10px;
     margin: 0 7.5px;
+    background-color: var(--main-highlight-color);
   }
   .event-card__img {
     margin-bottom: 15px;
@@ -1034,11 +985,18 @@
     height: 1px;
     background-color: #fff;
     transform-origin: 50% 50%;
+    transition: transform 0.3s ease;
   }
   .categories__item::before {
-    transform: translateY(-50%) rotate(-45deg);
+    transform: translateY(-50%) rotate(0deg);
   }
   .categories__item::after {
+    transform: translateY(-50%) rotate(90deg);
+  }
+  .categories__item._activ::before {
+    transform: translateY(-50%) rotate(-45deg);
+  }
+  .categories__item._activ::after {
     transform: translateY(-50%) rotate(45deg);
   }
   .categories__label {
@@ -1146,6 +1104,7 @@
     padding-top: 0;
     padding-bottom: 11px;
     padding-right: 10px;
+    border-top-color: transparent;
   }
   .contacts__colum-left_address > p {
     font-size: 14px;
@@ -1167,7 +1126,7 @@
     margin-bottom: -2px;
   }
   .request__input {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding: 8px 20px 9px;
   }
   .request__btn {
@@ -1215,5 +1174,60 @@
     height: 57px;
     margin: 0;
     padding: 0;
+  }
+}
+@media (max-width: 450px) {
+  /* .select-first > .choices.is-open {
+    margin-bottom: 150px;
+  }
+  .select-first > .choices {
+    transition: margin-bottom 0.3s ease;
+  } */
+  .gallery__container {
+    padding-top: 33px;
+    padding-bottom: 82px;
+  }
+  .gallery__header {
+    margin-left: 0;
+    margin-bottom: 0;
+    line-height: 2.5;
+  }
+
+  .body__filter {
+    padding-right: 0;
+  }
+  .select-last {
+    margin-bottom: 36px;
+  }
+  .filter__header {
+    margin-bottom: 6px;
+  }
+  .gallery__body_left-colum {
+    width: 100%;
+  }
+
+  .gallery-slider.swiper-container {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    min-width: 0;
+    margin-bottom: 18px;
+  }
+  .gallery-slider.swiper-container > .swiper-wrapper {
+    height: auto;
+  }
+  .swiper-slide.gallery-slider__img {
+    height: 100%;
+  }
+  .gallery-slider .slider__navigation {
+    margin-top: 20px;
+    margin-bottom: 0;
+    padding-left: 0;
+  }
+  .gallery__modal {
+    flex-wrap: wrap;
+    max-width: 100%;
+    margin-right: 10px;
+    margin-left: 10px;
   }
 }

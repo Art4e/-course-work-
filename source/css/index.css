@@ -239,7 +239,6 @@ body {
   color: var(--link-active) #7943a4;
 }
 
-
 /* Изменение стилей select плагина choices*/
 .choices__inner {
   min-height: 2rem;

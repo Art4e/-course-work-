@@ -155,12 +155,18 @@
 }
 
 .projects-slider__slide {
-  display: flex;
   height: 150px;
-  margin-right: 50px;
+  filter: grayscale(1);
+  padding-left: 1px;
+  padding-right: 1px;
+}
+
+.projects-slider__slide-wripper {
+  display: flex;
   border: 1px solid #cacaca;
   justify-content: center;
-  filter: grayscale(1);
+  height: 100%;
+  width: 100%;
 }
 
 .projects-slider__slide:focus,
