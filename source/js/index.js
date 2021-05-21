@@ -4,8 +4,6 @@
 
 //= modules/just-validate.min.js"
 
-//= modules/accordeon.js"
-
 //= modules/choices.min.js"
 
 //= modules/simplebar.min.js"

@@ -177,7 +177,7 @@
     conteinerImg.addEventListener(`click`, (ev) => {
       const conteinerModal = addModal(`.js-gallery-modal`);
 
-      const selectedImgEl = ev.target.children[ 0 ];
+      const selectedImgEl = ev.target.children[0];
       const authorData = selectedImgEl.dataset.author;
       const workData = selectedImgEl.dataset.work;
       const dateData = selectedImgEl.dataset.date;
@@ -271,7 +271,7 @@
       const setClassDeactivated = (elAll, deactiv = false) => {
         elAll.forEach(el => {
           el.classList.remove('deactivated');
-          if (!deactiv && el.offsetTop !== elAll[ 0 ].offsetTop) {
+          if (!deactiv && el.offsetTop !== elAll[0].offsetTop) {
             el.classList.add('deactivated');
           };
         });
@@ -568,6 +568,45 @@
       })();
 
     // Создаем аккардион
+    const crteatAccordion = (titleAccordeon) => {
+      const titleAllAccordeonEl = document.querySelectorAll(titleAccordeon);
+      const bodyAllAccordeonEl = document.querySelectorAll(`.col-right__items`);
+      if (titleAllAccordeonEl.length < 0) return;
+
+      titleAllAccordeonEl.forEach(el => {
+
+        el.addEventListener('click', (ev) => {
+          const el = ev.target;
+          const boolenActivEl = ev.target.classList.contains(`activ`);
+          const nextEl = ev.target.nextElementSibling;
+
+          const toggleClassActiv = (on = true) => {
+            if (on) {
+              titleAllAccordeonEl.forEach(el => {
+                el.classList.remove(`activ`);
+                setTimeout(() => { el.nextElementSibling.classList.remove(`in-visible`) }, 20);
+                el.nextElementSibling.classList.remove(`activ`);
+              })
+              ev.target.classList.add(`activ`);
+              nextEl.classList.add(`activ`);
+              setTimeout(() => { nextEl.classList.add(`in-visible`) }, 20);
+            } else {
+              ev.target.classList.remove(`activ`);
+              setTimeout(() => { nextEl.classList.remove(`in-visible`) }, 20);
+              nextEl.classList.remove(`activ`);
+            }
+          };
+
+          if (boolenActivEl) {
+            toggleClassActiv(false);
+          } else {
+            toggleClassActiv();
+          }
+
+        })
+      });
+    };
+
     crteatAccordion('.col-right__header');
 
     // Изменяем скролл 
@@ -620,7 +659,7 @@
       const tabsmenu = document.querySelectorAll(tabMenuNode);
       if (!tabsmenu) return;
       const content = document.querySelector(tabContainerNode);
-      const activDefaultBlockEl = content.querySelectorAll('.tab__item')[ 0 ];
+      const activDefaultBlockEl = content.querySelectorAll('.tab__item')[0];
 
       activDefaultBlockEl.style.display = 'block';
 
@@ -652,8 +691,8 @@
       const removeAttr = (elemensAll, element, indexEl) => {
         element.setAttribute(`data-tab-switch`, `false`);
         element.classList.remove(`activ`);
-        elemensAll[ indexEl ].setAttribute(`data-tab-open`, `false`);
-        elemensAll[ indexEl ].classList.remove(`activ`);
+        elemensAll[indexEl].setAttribute(`data-tab-open`, `false`);
+        elemensAll[indexEl].classList.remove(`activ`);
       };
 
       tabSwitchAllEl.forEach((el, index) => {
@@ -681,8 +720,8 @@
           el.classList.add(`activ`);
 
           setTimeout(() => {
-            tabAllEl[ index ].setAttribute(`data-tab-open`, `true`);
-            tabAllEl[ index ].classList.add(`activ`)
+            tabAllEl[index].setAttribute(`data-tab-open`, `true`);
+            tabAllEl[index].classList.add(`activ`)
           }, 10)
         })
       })
@@ -736,7 +775,7 @@
     ymaps.ready(init);
     function init() {
       let myMap = new ymaps.Map(`custom__map`, {
-        center: [ 55.7584, 37.6010 ],
+        center: [55.7584, 37.6010],
         zoom: 15,
         controls: [],
       });
@@ -745,13 +784,13 @@
         myMap.behaviors.disable(`drag`);
       }
 
-      let myGeoObject = new ymaps.Placemark([ 55.758463, 37.601079 ], {
+      let myGeoObject = new ymaps.Placemark([55.758463, 37.601079], {
 
       }, {
         iconLayout: `default#image`,
         iconImageHref: `./img/contacts/marker.svg`,
-        iconImageSize: [ 20, 20 ],
-        iconImageOffset: [ -10, -10 ]
+        iconImageSize: [20, 20],
+        iconImageOffset: [-10, -10]
       });
 
       // Размещение геообъекта на карте.

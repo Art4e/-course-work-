@@ -42,7 +42,7 @@
   --link-focus: #7943a4;
   --link-hover: #c283f3;
   --btn-border-radius: calc(100 / 2 * 1px);
-  --delay-animation: 0.3s ease-in-out;
+  --delay-animation: 0.3s ease;
   /* --container-padding: 160px; */
 }
 
