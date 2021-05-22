@@ -159,9 +159,9 @@
     margin-top: 20px;
   }
 
-  .catalog__col-left .tab__Item {
-    margin-left: -4px;
-  }
+  /* .catalog__col-left .tab__Item { */
+    /* margin-left: -4px;
+  } */
 
   .catalog__col-right {
     flex: 0 0 47.5%;

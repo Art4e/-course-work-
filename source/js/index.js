@@ -8,6 +8,10 @@
 
 //= modules/simplebar.min.js"
 
+//= modules/db.js"
+
+//= modules/catalog.js"
+
 //= modules/scroll.js"
 
 //= modules/script.js"
