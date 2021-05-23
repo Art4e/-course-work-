@@ -93,6 +93,7 @@
 
 .gallery__body-link.link-interaction {
   color: var(--link-hover);
+  transition: border-bottom 0.4s;
 }
 .gallery__body-link.link-interaction:hover {
   border-bottom: var(--link-focus-outline);
@@ -164,7 +165,7 @@
   line-height: 2.4rem;
   color: var(--fonts-secondary-color);
   border: 2px solid transparent;
-  transition: border, background, color var(--delay-animation);
+  transition: border var(--delay-animation), background var(--delay-animation), color var(--delay-animation);
 }
 .slider-button-next:hover::after,
 .slider-button-prev:hover::after {
@@ -232,7 +233,7 @@
   width: 100%;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 .modal {
   position: relative;
@@ -258,7 +259,7 @@
 .modal-wrapper._visible {
   opacity: 1;
   visibility: visible;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 .modal._visible {
   display: flex;

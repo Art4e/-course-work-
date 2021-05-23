@@ -29,6 +29,7 @@
   border: 2px solid transparent;
   border-radius: 50%;
   cursor: pointer;
+  transition: background 0.4s, border 0.4s;
 }
 .projects__tooltip:hover::after,
 .projects__tooltip:focus::after {
@@ -62,18 +63,21 @@
 
   transform: translate(-50%, -2.5rem);
 }
-.projects__link {
+.projects__link.link-interaction {
   display: inline-block;
   color: var(--main-highlight-color);
+  border-bottom: 1px solid transparent;
+  transition: border 0.3s;
+  line-height: 1.2;
 }
-.projects__link:visited {
+.projects__link.link-interaction:visited {
   color: var(--main-highlight-color);
 }
 .projects__link.link-interaction {
   color: var(--link-hover);
 }
 .projects__link.link-interaction:hover {
-  text-decoration: underline;
+  border-bottom: 1px solid var(--main-highlight-color);
 }
 
 .projects__header-h3 {
@@ -108,6 +112,7 @@
   margin-top: 0px;
   text-align: center;
   outline: none;
+  transition: border var(--delay-animation), background var(--delay-animation), color var(--delay-animation);
 }
 .projects-slider__btn-next {
   right: 0;

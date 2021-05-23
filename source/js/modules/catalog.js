@@ -29,29 +29,30 @@ const crteatAccordion = (titleAccordeon) => {
         setTimeout(() => { el.nextElementSibling.classList.remove(`in-visible`) }, 20);
         el.nextElementSibling.classList.remove(`activ`);
       })
-      el.classList.add(`activ`);
       nextEl.classList.add(`activ`);
-      setTimeout(() => { nextEl.classList.add(`in-visible`) }, 20);
+      el.classList.add(`activ`);
+      setTimeout(() => {
+        nextEl.classList.add(`in-visible`)
+      }, 100);
     } else {
+      nextEl.classList.remove(`in-visible`)
       el.classList.remove(`activ`);
-      setTimeout(() => { nextEl.classList.remove(`in-visible`) }, 20);
-      nextEl.classList.remove(`activ`);
+      setTimeout(() => {
+        nextEl.classList.remove(`activ`);
+      }, 400);
     }
   };
 
   titleAllAccordeonEl.forEach(el => {
-
     el.addEventListener('click', (ev) => {
       const element = ev.target;
 
       if (el.classList.contains(`activ`)) {
         toggleClassActiv(element, false);
-      } else {
-        toggleClassActiv(element);
-      }
+      } else toggleClassActiv(element);
 
     })
-    toggleClassActiv(titleAllAccordeonEl[ 0 ]);
+    toggleClassActiv(titleAllAccordeonEl[0]);
   });
 };
 
@@ -74,13 +75,13 @@ const createBodyCatalog = (arreyPer) => {
   arreyPeriodEl.forEach(e => e.innerHTML = null);
 
   arreyPer.forEach(person => {
-    arreyPeriodEl[ person.period ].insertAdjacentHTML(`beforeend`, `
+    arreyPeriodEl[person.period].insertAdjacentHTML(`beforeend`, `
       <li class="col-right__item" data-item-person="">
         <button class="col-right__btn">${person.name}</button>
       </li>`)
   });
 }
-
+// Создаем карточку из массива персон отбирая по имени
 const getPerson = (pesonsArrey, name) => {
   const cardPersonEl = document.querySelector(`.js-person`)
   const personAllEl = cardPersonEl.querySelectorAll(`[data-person]`)
@@ -91,16 +92,27 @@ const getPerson = (pesonsArrey, name) => {
       personAllEl.forEach(el => {
 
         if (el.getAttribute(`src`)) {
-          el.setAttribute(`src`, person[ el.dataset.person ])
+          el.setAttribute(`src`, person[el.dataset.person])
         } else {
           el.innerText = null
-          el.innerText = person[ el.dataset.person ]
+          el.innerText = person[el.dataset.person]
         }
       })
     }
   })
 }
-// Создаем и заполняем карточку персоны
+// переход к открываемой карточке на разрешении меньше 1001
+const goToCardPerson = (block) => {
+  const BP_TAB = 1001;
+  const viewportWidth = Math.trunc(window.visualViewport.width);
+  if (viewportWidth < BP_TAB) {
+    console.log(viewportWidth);
+    const outBlockValue = block.getBoundingClientRect().top + pageYOffset;
+    window.scrollTo({ top: outBlockValue, behavior: "smooth" });
+  }
+}
+
+// Слушаем нажатие на персону для вывода карточки персоны
 const createCardPerson = (pesonsArreyNew) => {
   const arreyCreatePersons = document.querySelectorAll(`[data-item-person]`)
 
@@ -109,24 +121,23 @@ const createCardPerson = (pesonsArreyNew) => {
       arreyCreatePersons.forEach(e => e.classList.remove(`activ`));
       ev.currentTarget.classList.add(`activ`)
       getPerson(pesonsArreyNew, ev.target.innerText)
+      goToCardPerson(document.querySelector(`.js-person`))
     })
   });
 }
-// действия при отурытии таба
+// действия при открытии таба
 const onTab = (element) => {
-
   const atrBtnCountry = element.dataset.country
   const newArreyPersons = arreyPersons.filter((el) => el.country === atrBtnCountry)
 
   toSwitchBtn(element)
-
-  if (catalogHeadText[ atrBtnCountry ]) document.querySelector(`.js-catalog-text`).innerText = catalogHeadText[ atrBtnCountry ]
+  if (catalogHeadText[atrBtnCountry]) document.querySelector(`.js-catalog-text`).innerText = catalogHeadText[atrBtnCountry]
 
   createBodyCatalog(newArreyPersons)
   createCardPerson(newArreyPersons)
   return newArreyPersons
 }
-
+// переключение фильтра странs по умолчанию(по классу - activ) при загрузке
 toSwitchBtn(document.querySelector(`[data-activ="true"]`))
 
 btnAll.forEach(el => {
@@ -135,23 +146,22 @@ btnAll.forEach(el => {
   const activEl = el.dataset.activ
 
   if (activEl) {
-    textCatalogEl.innerText = catalogHeadText[ countryEl ]
+    textCatalogEl.innerText = catalogHeadText[countryEl]
     createBodyCatalog(arreyPersons, countryEl)
   }
 
   el.addEventListener(`click`, (ev) => {
     ev.preventDefault
     // Запускаем onTab внутри getPerson, для открытия 1-й персоны массива страны
-    getPerson(onTab(ev.target), document.querySelectorAll(`[data-item-person]`)[ '0' ].innerText)
-    // onTab(ev.target)
+    getPerson(onTab(ev.target), document.querySelectorAll(`[data-item-person]`)['0'].innerText)
   })
 });
 
 // Открытие страны, периода времени и персоны по умолчанию при загрузке
 crteatAccordion('.col-right__header');
 const tempArreyPerson = onTab(document.querySelector(`[data-activ="true"]`))
-console.log(document.querySelectorAll(`[data-item-person]`)[ '0' ])
+console.log(document.querySelectorAll(`[data-item-person]`)['0'])
 console.log(tempArreyPerson)
 setTimeout(() => {
-  getPerson(tempArreyPerson, document.querySelectorAll(`[data-item-person]`)[ '0' ].innerText)
+  getPerson(tempArreyPerson, document.querySelectorAll(`[data-item-person]`)['0'].innerText)
 }, 300)

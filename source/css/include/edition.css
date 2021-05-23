@@ -48,6 +48,7 @@
   padding-right: 4px;
   cursor: pointer;
   line-height: 2;
+  transition: color 0.4s;
 }
 
 .categories__checkbox {
@@ -174,7 +175,7 @@
   line-height: 2.4rem;
   color: var(--fonts-secondary-color);
   border: 2px solid transparent;
-  transition: border, background, color var(--delay-animation);
+  transition: border var(--delay-animation), background var(--delay-animation), color var(--delay-animation);
 }
 .edition-slider-btn-next:hover::after,
 .edition-slider-btn-prev:hover::after {

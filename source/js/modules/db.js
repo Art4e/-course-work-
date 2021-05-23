@@ -30,8 +30,8 @@ const arreyPersonsFra = [
   {
     country: `fra`,
     period: 0,
-    replica: "img/catalog/catalog.jpg",
-    replicaBig: "img/catalog/catalog.jpg",
+    replica: "img/catalog/catalog-1.jpg",
+    replicaBig: "img/catalog/catalog-1.jpg",
     name: "Доменико Гирландайо",
     lifetime: "2 июня 1448 — 11 января 1494.",
     descr: "Один из ведущих флорентийских художников Кватроченто, основатель художественной династии, которую продолжили его брат Давид и сын Ридольфо. Глава художественной мастерской, где юный Микеланджело в течение года овладевал профессиональными навыками. Автор фресковых циклов, в которых выпукло, со всевозможными подробностями показана домашняя жизнь библейских персонажей (в их роли выступают знатные граждане Флоренции в костюмах того времени)."
@@ -371,7 +371,7 @@ const arreyPersonsGer = [
   //======================== 1400-1499
   {
     country: `ger`,
-    period: 1,
+    period: 0,
     replica: "img/catalog/Meister_Bertram_von_Minden_004.jpg",
     replicaBig: "img/catalog/Meister_Bertram_von_Minden_004.jpg",
     name: "Мастер Бертрам из Миндена",
@@ -380,7 +380,7 @@ const arreyPersonsGer = [
   },
   {
     country: `ger`,
-    period: 1,
+    period: 0,
     replica: `http://placehold.it/400x300/`,
     replicaBig: `http://placehold.it/400x300/`,
     name: `Бенедетто ди Биндо`,
@@ -389,7 +389,7 @@ const arreyPersonsGer = [
   },
   {
     country: `ger`,
-    period: 1,
+    period: 0,
     replica: `http://placehold.it/400x300/`,
     replicaBig: `http://placehold.it/400x300/`,
     name: `Бергоньоне Амброджо`,
@@ -398,7 +398,7 @@ const arreyPersonsGer = [
   },
   {
     country: `ger`,
-    period: 1,
+    period: 0,
     replica: `http://placehold.it/400x300/`,
     replicaBig: `http://placehold.it/400x300/`,
     name: `Биссоло Франческо`,
@@ -435,8 +435,8 @@ const arreyPersonsGer = [
   {
     country: `ger`,
     period: 0,
-    replica: "img/catalog/catalog.jpg",
-    replicaBig: "img/catalog/catalog.jpg",
+    replica: "img/catalog/catalog-1.jpg",
+    replicaBig: "img/catalog/catalog-1.jpg",
     name: "Доменико Гирландайо",
     lifetime: "2 июня 1448 — 11 января 1494.",
     descr: "Один из ведущих флорентийских художников Кватроченто, основатель художественной династии, которую продолжили его брат Давид и сын Ридольфо. Глава художественной мастерской, где юный Микеланджело в течение года овладевал профессиональными навыками. Автор фресковых циклов, в которых выпукло, со всевозможными подробностями показана домашняя жизнь библейских персонажей (в их роли выступают знатные граждане Флоренции в костюмах того времени)."
@@ -651,8 +651,8 @@ const arreyPersonsRus = [
   {
     country: `rus`,
     period: 0,
-    replica: "img/catalog/catalog.jpg",
-    replicaBig: "img/catalog/catalog.jpg",
+    replica: "img/catalog/catalog-1.jpg",
+    replicaBig: "img/catalog/catalog-1.jpg",
     name: "Доменико Гирландайо",
     lifetime: "2 июня 1448 — 11 января 1494.",
     descr: "Один из ведущих флорентийских художников Кватроченто, основатель художественной династии, которую продолжили его брат Давид и сын Ридольфо. Глава художественной мастерской, где юный Микеланджело в течение года овладевал профессиональными навыками. Автор фресковых циклов, в которых выпукло, со всевозможными подробностями показана домашняя жизнь библейских персонажей (в их роли выступают знатные граждане Флоренции в костюмах того времени)."
@@ -849,8 +849,8 @@ const arreyPersonsBel = [
   {
     country: `bel`,
     period: 0,
-    replica: "img/catalog/catalog.jpg",
-    replicaBig: "img/catalog/catalog.jpg",
+    replica: "img/catalog/catalog-1.jpg",
+    replicaBig: "img/catalog/catalog-1.jpg",
     name: "Доменико Гирландайо",
     lifetime: "2 июня 1448 — 11 января 1494.",
     descr: "Один из ведущих флорентийских художников Кватроченто, основатель художественной династии, которую продолжили его брат Давид и сын Ридольфо. Глава художественной мастерской, где юный Микеланджело в течение года овладевал профессиональными навыками. Автор фресковых циклов, в которых выпукло, со всевозможными подробностями показана домашняя жизнь библейских персонажей (в их роли выступают знатные граждане Флоренции в костюмах того времени)."
@@ -1065,8 +1065,8 @@ const arreyPersonsIta = [
   {
     country: `ita`,
     period: 0,
-    replica: "img/catalog/catalog.jpg",
-    replicaBig: "img/catalog/catalog.jpg",
+    replica: "img/catalog/catalog-1.jpg",
+    replicaBig: "img/catalog/catalog-1.jpg",
     name: "Доменико Гирландайо",
     lifetime: "2 июня 1448 — 11 января 1494.",
     descr: "Один из ведущих флорентийских художников Кватроченто, основатель художественной династии, которую продолжили его брат Давид и сын Ридольфо. Глава художественной мастерской, где юный Микеланджело в течение года овладевал профессиональными навыками. Автор фресковых циклов, в которых выпукло, со всевозможными подробностями показана домашняя жизнь библейских персонажей (в их роли выступают знатные граждане Флоренции в костюмах того времени)."
