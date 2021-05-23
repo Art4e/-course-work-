@@ -144,7 +144,7 @@ const scripts = () => {
     .pipe(gulpif(!argv.build, sourceMaps.init()))
     .pipe(rigger())
     .pipe(babel({
-      presets: [`@babel/env`]
+      presets: [ `@babel/env` ]
     }))
     .pipe(gulpif(argv.build, uglify().on(`error`, notify.onError())))
     .pipe(gulpif(!argv.build, sourceMaps.write()))
@@ -207,6 +207,8 @@ const webpsCompress = () => {
     .pipe(webp())
     .pipe(dest(path.imgIn.imgOut))
 }
+
+exports.imagesCompress = series(imagesCompress, webpsCompress)
 // -------- Перенос изображений
 const images = () => {
   return src(path.source.img)
@@ -219,7 +221,7 @@ const icons = () => {
 
 // -------- Удаляем папки dev и build прежде чесм собрать обновлённую сборку
 const delAll = () => {
-  return del([path.clean.dev, path.clean.build])
+  return del([ path.clean.dev, path.clean.build ])
 }
 
 // -------- Следим за изменениями в файлах

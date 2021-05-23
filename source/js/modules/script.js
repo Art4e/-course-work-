@@ -177,7 +177,7 @@
     conteinerImg.addEventListener(`click`, (ev) => {
       const conteinerModal = addModal(`.js-gallery-modal`);
 
-      const selectedImgEl = ev.target.children[0];
+      const selectedImgEl = ev.target.children[ 0 ];
       const authorData = selectedImgEl.dataset.author;
       const workData = selectedImgEl.dataset.work;
       const dateData = selectedImgEl.dataset.date;
@@ -271,7 +271,7 @@
       const setClassDeactivated = (elAll, deactiv = false) => {
         elAll.forEach(el => {
           el.classList.remove('deactivated');
-          if (!deactiv && el.offsetTop !== elAll[0].offsetTop) {
+          if (!deactiv && el.offsetTop !== elAll[ 0 ].offsetTop) {
             el.classList.add('deactivated');
           };
         });
@@ -395,7 +395,7 @@
       swiperGallery = new Swiper('.gallery-slider', swiperGallerySettings);
       if (bpCheck) {
         swiperGallery.destroy();
-        // swiperGallery = new Swiper('.gallery-slider', swiperGallerySettings);
+        swiperGallery = new Swiper('.gallery-slider', swiperGallerySettings);
       } else {
         swiperGallery.destroy();
         swiperGallery = new Swiper('.gallery-slider', swiperGallerySettings);
@@ -551,63 +551,8 @@
           itemSelectText: '',
         });
 
-        selectEl.addEventListener(
-          'addItem',
-          function (event) {
-
-            console.log(event);
-            // console.log(event.detail.id);
-            // console.log(event.detail.value);
-            // console.log(event.detail.label);
-            // console.log(event.detail.customProperties);
-            console.log(event.showDropdown);
-          },
-          false,
-        );
-        // });
       })();
 
-    // Создаем аккардион
-    const crteatAccordion = (titleAccordeon) => {
-      const titleAllAccordeonEl = document.querySelectorAll(titleAccordeon);
-      const bodyAllAccordeonEl = document.querySelectorAll(`.col-right__items`);
-      if (titleAllAccordeonEl.length < 0) return;
-
-      titleAllAccordeonEl.forEach(el => {
-
-        el.addEventListener('click', (ev) => {
-          const el = ev.target;
-          const boolenActivEl = ev.target.classList.contains(`activ`);
-          const nextEl = ev.target.nextElementSibling;
-
-          const toggleClassActiv = (on = true) => {
-            if (on) {
-              titleAllAccordeonEl.forEach(el => {
-                el.classList.remove(`activ`);
-                setTimeout(() => { el.nextElementSibling.classList.remove(`in-visible`) }, 20);
-                el.nextElementSibling.classList.remove(`activ`);
-              })
-              ev.target.classList.add(`activ`);
-              nextEl.classList.add(`activ`);
-              setTimeout(() => { nextEl.classList.add(`in-visible`) }, 20);
-            } else {
-              ev.target.classList.remove(`activ`);
-              setTimeout(() => { nextEl.classList.remove(`in-visible`) }, 20);
-              nextEl.classList.remove(`activ`);
-            }
-          };
-
-          if (boolenActivEl) {
-            toggleClassActiv(false);
-          } else {
-            toggleClassActiv();
-          }
-
-        })
-      });
-    };
-
-    crteatAccordion('.col-right__header');
 
     // Изменяем скролл 
     ; (() => {
@@ -775,7 +720,7 @@
     ymaps.ready(init);
     function init() {
       let myMap = new ymaps.Map(`custom__map`, {
-        center: [55.7584, 37.6010],
+        center: [ 55.7584, 37.6010 ],
         zoom: 15,
         controls: [],
       });
@@ -784,13 +729,13 @@
         myMap.behaviors.disable(`drag`);
       }
 
-      let myGeoObject = new ymaps.Placemark([55.758463, 37.601079], {
+      let myGeoObject = new ymaps.Placemark([ 55.758463, 37.601079 ], {
 
       }, {
         iconLayout: `default#image`,
         iconImageHref: `./img/contacts/marker.svg`,
-        iconImageSize: [20, 20],
-        iconImageOffset: [-10, -10]
+        iconImageSize: [ 20, 20 ],
+        iconImageOffset: [ -10, -10 ]
       });
 
       // Размещение геообъекта на карте.

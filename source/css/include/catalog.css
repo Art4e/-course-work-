@@ -225,8 +225,9 @@
 
 .col-right__item {
   display: inline-block;
-  text-align: center;
+  text-align: left;
   cursor: pointer;
+  width: 100%;
   user-select: none;
 }
 
@@ -238,11 +239,12 @@
   text-align: left;
   transition: border 0.5s ease, color 0.5s ease;
 }
+/* .col-right__item.activ > .col-right__btn, */
 .col-right__btn:hover {
   color: var(--main-highlight-color);
   border: var(--link-focus-outline);
 }
-.col-right__btn.js-active-tab {
+.col-right__item.activ > .col-right__btn {
   border-color: var(--main-highlight-color);
 }
 /* .tab__item {

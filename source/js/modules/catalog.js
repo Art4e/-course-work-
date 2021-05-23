@@ -14,6 +14,48 @@ const catalogHeadText = {
   bel: `Ещё в эпоху Ренессанса Фландрия прославилась своей живописью (фламандские примитивисты). Позднее во Фландрии жил и творил Рубенс (в Бельгии Антверпен до сих пор часто называют городом Рубенса). Однако ко второй половине XVII века фламандское искусство постепенно пришло в упадок. Позднее в Бельгии развивалась живопись в стилях романтизма, экспрессионизма и сюрреализма. Известные бельгийские художники — Джеймс Энсор (экспрессионизм и сюрреализм), Констант Пермеке (экспрессионизм), Леон Спиллиарт (символизм), Франц Ричард Унтербергер (романтизм), Ги Гюйгенс (фр.), Рене Магритт (считающийся одним из самых важных представителей сюрреализма).`
 };
 
+// ========================== Создаем аккардион ===============================================================
+const crteatAccordion = (titleAccordeon) => {
+  const titleAllAccordeonEl = document.querySelectorAll(titleAccordeon);
+  const bodyAllAccordeonEl = document.querySelectorAll(`.col-right__items`);
+  if (titleAllAccordeonEl.length < 0) return;
+
+  const toggleClassActiv = (el, on = true) => {
+    const nextEl = el.nextElementSibling;
+
+    if (on) {
+      titleAllAccordeonEl.forEach(el => {
+        el.classList.remove(`activ`);
+        setTimeout(() => { el.nextElementSibling.classList.remove(`in-visible`) }, 20);
+        el.nextElementSibling.classList.remove(`activ`);
+      })
+      el.classList.add(`activ`);
+      nextEl.classList.add(`activ`);
+      setTimeout(() => { nextEl.classList.add(`in-visible`) }, 20);
+    } else {
+      el.classList.remove(`activ`);
+      setTimeout(() => { nextEl.classList.remove(`in-visible`) }, 20);
+      nextEl.classList.remove(`activ`);
+    }
+  };
+
+  titleAllAccordeonEl.forEach(el => {
+
+    el.addEventListener('click', (ev) => {
+      const element = ev.target;
+
+      if (el.classList.contains(`activ`)) {
+        toggleClassActiv(element, false);
+      } else {
+        toggleClassActiv(element);
+      }
+
+    })
+    toggleClassActiv(titleAllAccordeonEl[ 0 ]);
+  });
+};
+
+// ========================== Создаем и заполняем табы ===============================================================
 const wrapperBtn = document.querySelector(`.js-country-select`)
 const btnAll = wrapperBtn.querySelectorAll(`[data-country]`)
 
@@ -32,45 +74,58 @@ const createBodyCatalog = (arreyPer) => {
   arreyPeriodEl.forEach(e => e.innerHTML = null);
 
   arreyPer.forEach(person => {
-    arreyPeriodEl[person.period].insertAdjacentHTML(`beforeend`, `
+    arreyPeriodEl[ person.period ].insertAdjacentHTML(`beforeend`, `
       <li class="col-right__item" data-item-person="">
         <button class="col-right__btn">${person.name}</button>
       </li>`)
   });
 }
 
-// Создаем и заполняем карточку персоны
-const createCardPerson = (pesonsArreyNew) => {
-  const arreyCreatePersons = document.querySelectorAll(`[data-item-person]`)
+const getPerson = (pesonsArrey, name) => {
   const cardPersonEl = document.querySelector(`.js-person`)
   const personAllEl = cardPersonEl.querySelectorAll(`[data-person]`)
 
-  arreyCreatePersons.forEach(el => {
+  pesonsArrey.forEach((person) => {
 
-    el.addEventListener(`click`, (ev) => {
-      const namePerson = ev.target.innerText;
+    if (name === person.name) {
+      personAllEl.forEach(el => {
 
-      pesonsArreyNew.forEach((person) => {
-
-        if (namePerson === person.name) {
-          console.log(namePerson === person.name, person.name)
-          personAllEl.forEach(el => {
-            console.log(el)
-            if (el.getAttribute(`src`)) {
-              el.setAttribute(`src`, person[el.dataset.person])
-            } else {
-              el.innerText = null
-              el.innerText = person[el.dataset.person]
-            }
-          })
+        if (el.getAttribute(`src`)) {
+          el.setAttribute(`src`, person[ el.dataset.person ])
+        } else {
+          el.innerText = null
+          el.innerText = person[ el.dataset.person ]
         }
       })
-    })
+    }
+  })
+}
+// Создаем и заполняем карточку персоны
+const createCardPerson = (pesonsArreyNew) => {
+  const arreyCreatePersons = document.querySelectorAll(`[data-item-person]`)
 
+  arreyCreatePersons.forEach(el => {
+    el.addEventListener(`click`, (ev) => {
+      arreyCreatePersons.forEach(e => e.classList.remove(`activ`));
+      ev.currentTarget.classList.add(`activ`)
+      getPerson(pesonsArreyNew, ev.target.innerText)
+    })
   });
 }
-//js-active-tab
-// if (btnAll.length < 0) return
+// действия при отурытии таба
+const onTab = (element) => {
+
+  const atrBtnCountry = element.dataset.country
+  const newArreyPersons = arreyPersons.filter((el) => el.country === atrBtnCountry)
+
+  toSwitchBtn(element)
+
+  if (catalogHeadText[ atrBtnCountry ]) document.querySelector(`.js-catalog-text`).innerText = catalogHeadText[ atrBtnCountry ]
+
+  createBodyCatalog(newArreyPersons)
+  createCardPerson(newArreyPersons)
+  return newArreyPersons
+}
 
 toSwitchBtn(document.querySelector(`[data-activ="true"]`))
 
@@ -80,24 +135,23 @@ btnAll.forEach(el => {
   const activEl = el.dataset.activ
 
   if (activEl) {
-    textCatalogEl.innerText = catalogHeadText[countryEl]
+    textCatalogEl.innerText = catalogHeadText[ countryEl ]
     createBodyCatalog(arreyPersons, countryEl)
   }
 
   el.addEventListener(`click`, (ev) => {
     ev.preventDefault
-    const elData = ev.target
-    const atrBtnCountry = elData.dataset.country
-    const newArreyPersons = arreyPersons.filter((el) => el.country === atrBtnCountry)
-
-    toSwitchBtn(elData)
-
-    if (catalogHeadText[atrBtnCountry]) textCatalogEl.innerText = catalogHeadText[atrBtnCountry]
-
-    createBodyCatalog(newArreyPersons)
-
-    createCardPerson(newArreyPersons)
-
+    // Запускаем onTab внутри getPerson, для открытия 1-й персоны массива страны
+    getPerson(onTab(ev.target), document.querySelectorAll(`[data-item-person]`)[ '0' ].innerText)
+    // onTab(ev.target)
   })
-
 });
+
+// Открытие страны, периода времени и персоны по умолчанию при загрузке
+crteatAccordion('.col-right__header');
+const tempArreyPerson = onTab(document.querySelector(`[data-activ="true"]`))
+console.log(document.querySelectorAll(`[data-item-person]`)[ '0' ])
+console.log(tempArreyPerson)
+setTimeout(() => {
+  getPerson(tempArreyPerson, document.querySelectorAll(`[data-item-person]`)[ '0' ].innerText)
+}, 300)
