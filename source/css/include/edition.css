@@ -66,19 +66,22 @@
   height: 13px;
   border: 1px solid #fff;
   transform: translateY(-50%);
-  transition: color var(--delay-animation);
+  transition: color var(--delay-animation), border var(--delay-animation);
 }
 
-.categories__checkbox:checked ~ .categories__marker::after {
+.categories__checkbox ~ .categories__marker::after {
   position: absolute;
   content: "";
   top: 3px;
   left: 3px;
   width: 5px;
   height: 5px;
-  background-color: #fff;
+  background-color: transparent;
   border-radius: 50%;
-  transition: background-color var(--delay-animation);
+  transition: background 0.3s;
+}
+.categories__checkbox:checked ~ .categories__marker::after {
+  background-color: var(--link-hover);
 }
 .categories__checkbox:focus ~ .categories__label {
   outline: var(--link-focus-outline);
@@ -97,9 +100,6 @@
 }
 .categories__checkbox:checked ~ .categories__marker {
   border: 1px solid var(--link-hover);
-}
-.categories__checkbox:checked ~ .categories__marker::after {
-  background-color: var(--link-hover);
 }
 .categories__checkbox:checked ~ .categories__label {
   color: var(--link-hover);
@@ -125,6 +125,8 @@
   padding: 10px;
   background: rgba(157, 92, 208, 0.5);
   color: var(--fonts-secondary-color);
+  outline: 1px solid transparent;
+  transition: outline 0.3s;
 }
 .price__input:hover,
 .price__input:focus,

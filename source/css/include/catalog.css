@@ -77,17 +77,16 @@
   margin-bottom: 30px;
   padding-left: 3px;
 }
-.catalog__head-text > p {
+.catalog__head-text > .block-text {
   margin-bottom: 40px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
-.catalog__head-texts-body .catalog__head-text {
-  /* opacity: 0; */
-  /* transition-duration: 0s, 0.4s;
-  transition-delay: 0.4s, 0.1s;
-  transition-property: height, opacity; */
-}
-.catalog__head-texts-body .catalog__head-text.activ {
+.catalog__head-text > .block-text {
+  visibility: visible;
   opacity: 1;
+  transition: opacity 0.3s;
 }
 
 .catalog__body {
@@ -129,12 +128,18 @@
   color: #333;
   font-weight: 600;
   font-size: 24px;
+  transition: color 0.3s;
 }
 
 .col-right__header {
   position: relative;
   width: 100%;
-  padding: 32px 0;
+  margin: 0;
+  padding: 0;
+  padding: 32px 0 32px 7px;
+  text-align: left;
+  background-color:transparent;
+  border: none;
   border-top: 1px solid #cacaca;
   cursor: pointer;
   transition: height 0.4s;
@@ -147,7 +152,7 @@
   position: absolute;
   content: "";
   top: 50%;
-  right: 0;
+  right: 7px;
   width: 50px;
   height: 50px;
   transform: translateY(-50%);
@@ -160,7 +165,7 @@
   position: absolute;
   content: "";
   top: 50%;
-  right: 19px;
+  right: 26px;
   width: 12px;
   height: 12px;
   transform-origin: center;
@@ -169,17 +174,23 @@
   border-bottom: 1px solid #000;
   transition: transform var(--delay-animation), border-color var(--delay-animation);
 }
-
-.col-right__header:focus::before {
-  border: var(--link-focus-outline);
+.col-right__header.activ:focus + .col-right__items,
+.col-right__header:focus + .col-right__items {
+  border-top: 1px solid transparent;
 }
-
+.col-right__header:focus {
+  outline: 1px solid var(--main-highlight-color);
+  outline-offset: -1px; 
+}
 .col-right__header:hover::before {
   background-color: var(--main-highlight-color);
 }
+.col-right__header:hover .second-header {
+  color: var(--main-highlight-color);
+}
 
-.col-right__header.activ::after,
-.col-right__header:focus::after {
+/* .col-right__header:focus::after, */
+.col-right__header.activ::after{
   border-right: 1px solid #fff;
   border-bottom: 1px solid #fff;
 }
@@ -242,8 +253,15 @@
 }
 .col-right__btn:hover {
   color: var(--main-highlight-color);
+  border-bottom: var(--link-focus-outline);
+}
+.col-right__btn:focus {
   border: var(--link-focus-outline);
 }
+.col-right__btn:active {
+  color: var(--link-focus);
+  border: 2px solid transparent;
+}
 .col-right__item.activ > .col-right__btn {
-  color: var(--main-highlight-color);
+  color: var(--link-focus);
 }

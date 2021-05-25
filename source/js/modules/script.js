@@ -52,23 +52,24 @@
 
     // Открываем нижнее меню
     ; (() => {
-      const downMenuItemsEl = document.querySelectorAll('.js-head-down__menu > li');
-
-      downMenuItemsEl.forEach(el => {
-        el.addEventListener(`click`, () => {
+      const downMenuBtnEl = document.querySelectorAll('.js-head-down__menu button');
+      console.log(downMenuBtnEl)
+      downMenuBtnEl.forEach(el => {
+        el.addEventListener(`click`, (ev) => {
+          const el = ev.currentTarget
+          console.log(el)
           if (el.classList.contains('activ')) {
             el.classList.remove('activ')
             return
           } else {
-            downMenuItemsEl.forEach(e => e.classList.remove('activ'));
+            downMenuBtnEl.forEach(e => e.classList.remove('activ'));
             el.classList.add('activ');
-
           }
         })
         // el.onmouseover = () => el.classList.add('activ');
         // el.onmouseout = () => el.classList.remove('activ');
-        el.addEventListener('focus', () => el.classList.add('activ'));
-        el.addEventListener('blur', () => el.classList.remove('activ'));
+        // el.addEventListener('focus', () => el.classList.add('activ'));
+        // el.addEventListener('blur', () => el.classList.remove('activ'));
       });
 
     })();

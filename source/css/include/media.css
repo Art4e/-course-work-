@@ -67,7 +67,9 @@
   .head-down {
     font-size: 1.4rem;
   }
-
+  .menu-item__head {
+    padding: 21px 19px 23px 3px;
+  }
   .head-down__menu-item {
     margin-right: 35px;
   }

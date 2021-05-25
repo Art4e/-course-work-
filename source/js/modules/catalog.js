@@ -45,7 +45,7 @@ const crteatAccordion = (titleAccordeon) => {
 
   titleAllAccordeonEl.forEach(el => {
     el.addEventListener('click', (ev) => {
-      const element = ev.target;
+      const element = ev.currentTarget;
 
       if (el.classList.contains(`activ`)) {
         toggleClassActiv(element, false);
@@ -137,7 +137,7 @@ const onTab = (element) => {
   createCardPerson(newArreyPersons)
   return newArreyPersons
 }
-// переключение фильтра странs по умолчанию(по классу - activ) при загрузке
+// переключение фильтра страны по умолчанию(по классу - activ) при загрузке
 toSwitchBtn(document.querySelector(`[data-activ="true"]`))
 
 btnAll.forEach(el => {
@@ -146,7 +146,9 @@ btnAll.forEach(el => {
   const activEl = el.dataset.activ
 
   if (activEl) {
+    textCatalogEl.classList.remove(`in-visible`)
     textCatalogEl.innerText = catalogHeadText[countryEl]
+    setTimeout(() => textCatalogEl.classList.add(`in-visible`), 3000)
     createBodyCatalog(arreyPersons, countryEl)
   }
 
@@ -160,8 +162,6 @@ btnAll.forEach(el => {
 // Открытие страны, периода времени и персоны по умолчанию при загрузке
 crteatAccordion('.col-right__header');
 const tempArreyPerson = onTab(document.querySelector(`[data-activ="true"]`))
-console.log(document.querySelectorAll(`[data-item-person]`)['0'])
-console.log(tempArreyPerson)
 setTimeout(() => {
   getPerson(tempArreyPerson, document.querySelectorAll(`[data-item-person]`)['0'].innerText)
 }, 300)

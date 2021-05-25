@@ -92,11 +92,13 @@
 }
 
 .gallery__body-link.link-interaction {
+  outline: none;
   color: var(--link-hover);
   transition: border-bottom 0.4s;
 }
 .gallery__body-link.link-interaction:hover {
   border-bottom: var(--link-focus-outline);
+  border-bottom-width: 1px;
 }
 
 .link {
