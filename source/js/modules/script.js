@@ -10,6 +10,21 @@
       } else bodyEl.style.paddingRight = lockPaddingValue;
     };
 
+    // Установка брекпоинта (bpUse) в режиме-'max-width', для выполнения функции(exeFn)
+    const setBreakPoint = (bpUse, exeFn) => {
+      const breakPoint = window.matchMedia(`(max-width:${bpUse}px)`);
+      const bpChecker = function () {
+        if (breakPoint.matches) {
+          exeFn(true);
+        } else if (!breakPoint.matches) {
+          exeFn(false);
+        }
+      };
+
+      breakPoint.addListener(bpChecker);
+      bpChecker();
+    };
+
     const swiperHead = new Swiper('.hero__slider', {
       autoplay: {
         delay: 3000,
@@ -23,6 +38,26 @@
         }
       }
     });
+
+    // Прокрутка до раздела выбранного в меню
+    const TOP_BORDER = 0;
+    const menuEl = document.querySelector(`.js-menu-items`);
+    const itemEl = menuEl.querySelectorAll(`[data-section]`);
+
+    const getPageY = (elem) => {
+      const box = elem.getBoundingClientRect();
+      return box.top + pageYOffset
+    };
+
+    itemEl.forEach(el => {
+      el.addEventListener(`click`, (ev) => {
+        const targetEl = ev.target.dataset.section;
+        const sectionEl = document.querySelector(targetEl);
+
+        window.scrollTo({ top: getPageY(sectionEl), behavior: 'smooth' })
+      }, { passive: true })
+    });
+
 
     // Открываем, закрываем бургер меню
     const headUpEl = document.querySelector('.js-head-up');
@@ -44,50 +79,33 @@
       };
 
       menuLinksEl.forEach(el => {
-        if (ev.target === el) toggleActivClass()
+        if (ev.target === el && burgerMenuEl.classList.contains('activ')) toggleActivClass()
       });
-
       if (ev.target === burgerEl || ev.target === burgerBodyEl) toggleActivClass();
     });
 
     // Открываем нижнее меню
     ; (() => {
       const downMenuBtnEl = document.querySelectorAll('.js-head-down__menu button');
-      console.log(downMenuBtnEl)
+
       downMenuBtnEl.forEach(el => {
         el.addEventListener(`click`, (ev) => {
           const el = ev.currentTarget
-          console.log(el)
+
           if (el.classList.contains('activ')) {
             el.classList.remove('activ')
-            return
+            const autorllEl = document.querySelectorAll(`.autor__item`);
+            autorllEl.forEach(el => el.removeAttribute(`tabindex`));
           } else {
             downMenuBtnEl.forEach(e => e.classList.remove('activ'));
             el.classList.add('activ');
+            const autorActivEl = el.nextElementSibling.querySelectorAll(`.autor__item`);
+            autorActivEl.forEach(el => el.setAttribute(`tabindex`, `0`));
           }
         })
-        // el.onmouseover = () => el.classList.add('activ');
-        // el.onmouseout = () => el.classList.remove('activ');
-        // el.addEventListener('focus', () => el.classList.add('activ'));
-        // el.addEventListener('blur', () => el.classList.remove('activ'));
       });
 
     })();
-
-    // Установка брекпоинта (bpUse) в режиме-'max-width', для выполнения функции(exeFn)
-    const setBreakPoint = (bpUse, exeFn) => {
-      const breakPoint = window.matchMedia(`(max-width:${bpUse}px)`);
-      const bpChecker = function () {
-        if (breakPoint.matches) {
-          exeFn(true);
-        } else if (!breakPoint.matches) {
-          exeFn(false);
-        }
-      };
-
-      breakPoint.addListener(bpChecker);
-      bpChecker();
-    };
 
     // Изменяем положение поиска на брекпоинте 1050
     ; (() => {
@@ -98,6 +116,7 @@
         btnSearchEl.addEventListener(`click`, (ev) => {
           ev.preventDefault();
           if (btnSearchEl.classList.contains(`_activ`)) {
+            if (inputSearchEl.value.trim() !== ``) return inputSearchEl.value = ``
             btnSearchEl.classList.remove(`_activ`);
             inputSearchEl.classList.remove(`_activ`);
             inputSearchEl.blur()
@@ -107,11 +126,12 @@
             inputSearchEl.focus()
           }
         });
+
       };
 
-      const formSearchEl = document.querySelector('.js-header__search'),
-        inContainerSearchEl = document.querySelector('.js-head-up'),
-        outContainerSearchEl = document.querySelector('.js-head-down');
+      const formSearchEl = document.querySelector('.js-header__search')
+      const inContainerSearchEl = document.querySelector('.js-head-up')
+      const outContainerSearchEl = document.querySelector('.js-head-down')
       const SIZE_SCRIN = 1050;
       const pageWidth = Math.max(
         document.body.scrollWidth, document.documentElement.scrollWidth,
@@ -176,12 +196,6 @@
       return conteinerModal;
     };
 
-    // const setPaddingToBody = () => {
-    //   lockPaddingValue = `${window.innerWidth - document.querySelector(`.header`).offsetWidth}px`
-    //   console.log(lockPaddingValue);
-    //   body.style.paddingRight = lockPaddingValue;
-    // }
-
     // Репродукция с описанием
     const conteinerImg = document.querySelector(`.js-gallery-img`);
 
@@ -200,9 +214,6 @@
       conteinerModal.querySelector(`.gallery__modal-date`).innerHTML = dateData;
       conteinerModal.querySelector(`.gallery__modal-description`).innerHTML = descriptionData;
     });
-    // Модалка после отправки заявки в разделе контакты
-    // openModalThanks(successModal)
-
 
     // ToolTip
     ; (() => {
@@ -290,16 +301,21 @@
 
       setClassDeactivated(devAllCard);
 
-      buttonEl.addEventListener('click', () => {
+      buttonEl.addEventListener('click', (ev) => {
         const deactivatedEl = document.querySelectorAll('.deactivated');
+        let textBtn = ev.currentTarget.children[0]
 
         if (deactivatedEl.length === 0) {
           setClassDeactivated(devAllCard);
+          window.scrollTo({ top: getPageY(devAllCard[0]), behavior: 'smooth' })
+          textBtn.innerHTML = 'Все события';
+
         } else if (deactivatedEl.length !== 0) {
           setClassDeactivated(devAllCard, true);
+          window.scrollTo({ top: getPageY(deactivatedEl[0]), behavior: 'smooth' })
+          textBtn.innerHTML = 'Последние события';
         };
 
-        buttonEl.remove();
       });
 
       const BP_DEVELOPMENTS = 1000;
@@ -358,12 +374,6 @@
           slidesPerColumn: 2,
           spaceBetween: 50
         },
-        // 651: {
-        //   slidesPerView: 2,
-        //   slidesPerGroup: 2,
-        //   slidesPerColumn: 2,
-        //   spaceBetween: 30
-        // },
         451: {
           slidesPerView: 2,
           slidesPerGroup: 2,
@@ -403,12 +413,13 @@
     // перезапуск 
     const BP_GALLERY = 450;
     setBreakPoint(BP_GALLERY, (bpCheck) => {
+      console.log(bpCheck)
       swiperGallery = new Swiper('.gallery-slider', swiperGallerySettings);
       if (bpCheck) {
-        swiperGallery.destroy();
+        swiperGallery.destroy(false, true);
         swiperGallery = new Swiper('.gallery-slider', swiperGallerySettings);
       } else {
-        swiperGallery.destroy();
+        swiperGallery.destroy(false, true);
         swiperGallery = new Swiper('.gallery-slider', swiperGallerySettings);
       };
     })

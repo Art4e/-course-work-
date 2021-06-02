@@ -74,9 +74,10 @@ const createBodyCatalog = (arreyPer) => {
   const arreyPeriodEl = document.querySelectorAll(`[date-period]`)
   arreyPeriodEl.forEach(e => e.innerHTML = null);
 
-  arreyPer.forEach(person => {
+  arreyPer.forEach((person, index) => {
+    const activClass = index === 0 ? ' activ' : '';
     arreyPeriodEl[person.period].insertAdjacentHTML(`beforeend`, `
-      <li class="col-right__item" data-item-person="">
+      <li class="col-right__item${activClass}" data-item-person="">
         <button class="col-right__btn">${person.name}</button>
       </li>`)
   });
@@ -163,5 +164,7 @@ btnAll.forEach(el => {
 crteatAccordion('.col-right__header');
 const tempArreyPerson = onTab(document.querySelector(`[data-activ="true"]`))
 setTimeout(() => {
-  getPerson(tempArreyPerson, document.querySelectorAll(`[data-item-person]`)['0'].innerText)
+  const firstEl = document.querySelectorAll(`[data-item-person]`)['0']
+  firstEl.classList.add(`activ`)
+  getPerson(tempArreyPerson, firstEl.innerText)
 }, 300)

@@ -133,7 +133,7 @@
   line-height: 2.4rem;
   color: #000;
   border: 2px solid transparent;
-  transition: border, background, color var(--delay-animation);
+  transition: border var(--delay-animation), background var(--delay-animation), color var(--delay-animation);
 }
 .projects-slider__btn-prev:hover:after,
 .projects-slider__btn-next:hover:after {
@@ -164,6 +164,7 @@
   filter: grayscale(1);
   padding-left: 1px;
   padding-right: 1px;
+  transition: filter 0.4s;
 }
 
 .projects-slider__slide-wripper {
@@ -172,6 +173,7 @@
   justify-content: center;
   height: 100%;
   width: 100%;
+  cursor: pointer;
 }
 
 .projects-slider__slide:focus,

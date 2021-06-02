@@ -12,6 +12,4 @@
 
 //= modules/catalog.js"
 
-//= modules/scroll.js"
-
 //= modules/script.js"
