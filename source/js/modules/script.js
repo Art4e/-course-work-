@@ -58,30 +58,40 @@
       }, { passive: true })
     });
 
-
     // Открываем, закрываем бургер меню
     const headUpEl = document.querySelector('.js-head-up');
-    headUpEl.addEventListener('click', (ev) => {
-      const bodyEl = document.querySelector('body');
-      const burgerEl = headUpEl.querySelector('.js-header-burger');
-      const burgerBodyEl = burgerEl.querySelector('span');
-      const burgerMenuEl = headUpEl.querySelector('.js-header__menu');
-      const comeInEl = headUpEl.querySelector('.js-come-in');
-      const menuLinksEl = headUpEl.querySelectorAll('a');
+    const arrayEl = [
+      headUpEl.querySelector('.js-header__menu'),
+      headUpEl.querySelector('.js-header-burger'),
+      headUpEl.querySelector('.js-header-burger > span'),
+      headUpEl.querySelector('.js-come-in'),
+      document.querySelector('body'),
+    ]
 
-      const toggleActivClass = () => {
-        burgerMenuEl.classList.toggle('activ');
-        burgerBodyEl.classList.toggle('activ');
-        comeInEl.classList.toggle('activ');
-        burgerEl.classList.toggle('activ');
-        !!bodyEl.classList.contains('body_lock') ? setPaddingToBody(true) : setPaddingToBody();
-        bodyEl.classList.toggle('body_lock');
-      };
-
-      menuLinksEl.forEach(el => {
-        if (ev.target === el && burgerMenuEl.classList.contains('activ')) toggleActivClass()
+    const toggleActivClass = () => {
+      arrayEl.forEach(el => {
+        if (el.classList.contains('activ') || el.classList.contains('body_lock')) {
+          if (el.tagName === 'BODY') {
+            setPaddingToBody(true)
+            // !!el.classList.contains('body_lock') ? setPaddingToBody(true) : setPaddingToBody()
+            el.classList.remove('body_lock')
+          } else el.classList.remove('activ')
+        } else {
+          if (el.tagName === 'BODY') {
+            setPaddingToBody()
+            el.classList.add('body_lock')
+          } else el.classList.add('activ')
+        }
       });
-      if (ev.target === burgerEl || ev.target === burgerBodyEl) toggleActivClass();
+    };
+
+    headUpEl.addEventListener('click', (ev) => {
+      headUpEl.querySelectorAll('a').forEach(el => {
+        const headUpElActiv = headUpEl.querySelector('.js-header__menu').classList.contains('activ')
+        if (ev.target === el && headUpElActiv) toggleActivClass()
+      });
+
+      if (ev.target === arrayEl[1] || ev.target === arrayEl[2]) toggleActivClass();
     });
 
     // Открываем нижнее меню
@@ -110,23 +120,26 @@
     // Изменяем положение поиска на брекпоинте 1050
     ; (() => {
       const openSerch = () => {
-        const btnSearchEl = document.querySelector('.js-search__button');
-        const inputSearchEl = document.querySelector('.js-search-input');
+        const btnSearchEl = document.querySelector(`.js-search__button`);
+        const inputSearchEl = document.querySelector(`.js-search-input`);
+        const formSearchEl = document.querySelector(`.js-header__search`);
+        const burgerEl = document.querySelector(`.js-header-burger`);
 
         btnSearchEl.addEventListener(`click`, (ev) => {
           ev.preventDefault();
           if (btnSearchEl.classList.contains(`_activ`)) {
             if (inputSearchEl.value.trim() !== ``) return inputSearchEl.value = ``
+            formSearchEl.classList.remove(`_activ`);
             btnSearchEl.classList.remove(`_activ`);
             inputSearchEl.classList.remove(`_activ`);
             inputSearchEl.blur()
           } else {
+            formSearchEl.classList.add(`_activ`);
             btnSearchEl.classList.add(`_activ`);
             inputSearchEl.classList.add(`_activ`);
             inputSearchEl.focus()
           }
         });
-
       };
 
       const formSearchEl = document.querySelector('.js-header__search')
@@ -315,7 +328,6 @@
           window.scrollTo({ top: getPageY(deactivatedEl[0]), behavior: 'smooth' })
           textBtn.innerHTML = 'Последние события';
         };
-
       });
 
       const BP_DEVELOPMENTS = 1000;
@@ -413,7 +425,6 @@
     // перезапуск 
     const BP_GALLERY = 450;
     setBreakPoint(BP_GALLERY, (bpCheck) => {
-      console.log(bpCheck)
       swiperGallery = new Swiper('.gallery-slider', swiperGallerySettings);
       if (bpCheck) {
         swiperGallery.destroy(false, true);
@@ -565,7 +576,7 @@
       ; (() => {
         const selectEl = document.querySelector('.js-filter-select');
         if (!selectEl) return;
-        // selectAllEl.forEach(el => {
+
         const realism = new Choices(selectEl, {
           searchEnabled: false,
           shouldSort: false,
@@ -576,21 +587,18 @@
       })();
 
 
-    // Изменяем скролл 
+    // ----------- Кастомный скролл
     ; (() => {
       const scrollingEl = document.querySelectorAll('.authors__items');
-
-      scrollingEl.forEach(el => {
-        new SimpleBar(el, { autoHide: false });
-      });
+      scrollingEl.forEach(el => { new SimpleBar(el, { autoHide: false }) });
     })();
 
-    // ----------- маска телефона
+    // ----------- Маска телефона
     const inputTelEl = document.querySelectorAll('input[type="tel"]');
     const im = new Inputmask('+7 (999) 999-99-99');
     im.mask(inputTelEl);
 
-    // Обработка формы
+    // ----------- Обработка формы
     const validateForms = function (selector, rules, successModal, yaGoal) {
       new window.JustValidate(selector, {
         rules: rules,
@@ -599,18 +607,12 @@
           const xhr = new XMLHttpRequest();
 
           xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-              console.log('Отправлено');
-              addModal(successModal);
-            };
+            if (xhr.readyState === 4 && xhr.status === 200) addModal(successModal)
           }
 
           xhr.open('POST', '../mail.php', true);
           xhr.send(formData);
-
           form.reset();
-          // addModal(successModal);
-          // fileInput.closest('label').querySelector('span').textContent = 'Прикрепить файл';
         }
       });
     };
@@ -626,7 +628,7 @@
 
     validateForms(`#contacts__form`, optionsInput, `.js-contacts-modal`, `send goal`);
 
-    // Яндекс карта
+    // ----------- Яндекс карта
     ymaps.ready(init);
     function init() {
       let myMap = new ymaps.Map(`custom__map`, {
@@ -648,7 +650,7 @@
         iconImageOffset: [-10, -10]
       });
 
-      // Размещение геообъекта на карте.
+      // ----------- Размещение геообъекта на карте.
       myMap.geoObjects.add(myGeoObject);
     };
 
